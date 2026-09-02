@@ -1,0 +1,64 @@
+# Edit this file whenever priorities change. The agent reads it at the start of every run.
+# Nothing else needs to change.
+
+run_mode: daily            # daily | weekly | monthly | earnings-week
+read_budget_words: 1200    # roughly a 10 minute read (1200 words)
+depth_dial: 5              # 1 = headlines only, 5 = analyst memo
+
+lookback_hours: 24
+monday_lookback_hours: 72
+
+watchlist:
+  - NVDA
+  - VRT
+  - CEG
+  - SMH
+  - QQQM
+  - AIPO
+
+shadow_list:
+  - MSFT
+  - GOOGL
+  - AMZN
+  - META
+  - ORCL
+  - AVGO
+  - AMD
+  - TSM
+  - CRWV
+  - ANET
+  - ETN
+  - GEV
+  - TSLA
+  - SPCX
+  - PLTR
+
+private_watch:
+  - OpenAI
+  - Anthropic
+  - xAI
+  - Mistral
+  - SSI
+  - Figure
+  - Physical Intelligence
+  - Skild
+  - Waymo
+  - Nuro
+  - Applied Intuition
+  - Databricks
+  - Scale
+  - Surge
+  - Harvey
+  - Sierra
+  - Cursor
+  - Hugging Face
+
+mute:
+  - model-vibes threads
+  - funding rounds under $20M with no strategic angle
+  - rehashed op-eds
+  - benchmark claims with no independent verification
+
+score_threshold: 14        # out of 20, across materiality + proximity + novelty + source_quality
+min_items_for_full_brief: 3
+max_items: 6
