@@ -17,10 +17,12 @@ import argparse
 import asyncio
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
 import time
+from datetime import date
 from pathlib import Path
 
 from claude_agent_sdk import (
@@ -36,6 +38,7 @@ from claude_agent_sdk import (
 
 PROJECT = Path(__file__).parent.resolve()
 EXPECTED_BEATS = 9  # coverage map in system-prompt.md section 3
+PACK_DIR = PROJECT / "state" / "sourcedesk"
 
 BEAT_RESEARCHER = AgentDefinition(
     description=(
@@ -48,11 +51,19 @@ Your caller gives you: a beat name, what counts for that beat, a lookback window
 a mute list, and headlines already published in past briefs.
 
 Procedure:
-1. Run several distinct WebSearch queries for your beat. Vary the phrasing. One query is not a sweep.
-2. Open every promising result with WebFetch. A search snippet is a lead, not a source.
-3. Drop anything on the mute list, anything already covered without a material update, and
+1. Read your sourcedesk pack first, at the path your caller gives you. It holds candidates
+   already pulled from a curated, endpoint-verified source list: deduplicated across feeds,
+   tier-tagged, and marked with how many independent publishers carried each one. It is a
+   head start, not an answer, and it is deliberately incomplete. If the file is missing or
+   empty, say so in your return and work from search alone.
+2. Run several distinct WebSearch queries for your beat, aimed at what the pack does not
+   already cover. Vary the phrasing. One query is not a sweep.
+3. Open every promising result with WebFetch, pack lines included. A pack line is a lead
+   exactly like a search snippet: you have not read it until you fetch it.
+4. Drop anything on the mute list, anything already covered without a material update, and
    anything outside the lookback window.
-4. Score what survives and return at most six items.
+5. Score what survives and return at most six items. Pack provenance earns no free points:
+   score a packed item on the same four axes as anything you found yourself.
 
 Scoring, 1 to 5 each:
 - materiality: does this change a number, a plan, or a constraint
@@ -82,16 +93,68 @@ If a fetch failed, still list the item with `fetched: no` so the caller can deci
 If the beat is genuinely empty for this window, return `candidates: []`. Do not manufacture items.""",
     tools=["WebSearch", "WebFetch", "Read"],
     model="sonnet",
+    # Searching, fetching and scoring is mechanical work. Low effort and a turn cap
+    # keep nine parallel researchers from dominating the run's cost.
+    effort="low",
+    maxTurns=16,
 )
 
 TRIGGER = """Run the brief.
 
 Follow the run procedure in your system prompt exactly, starting with the date check.
+
+A sourcedesk pre-pass has already run. It fetched the curated source list, deduplicated it
+into events, and wrote one candidate pack per beat to ./state/sourcedesk/. Read
+./state/sourcedesk/index.md first to see how many candidates each beat got, then read
+./state/sourcedesk/unrouted.md yourself: it holds real items that matched no beat, and an
+item that fits no beat can still be the story.
+
 Dispatch the beat-researcher subagent once per beat in your coverage map, all in a single
 batch so they run in parallel. Give each one everything it needs in the Agent prompt, since
-subagents inherit none of this conversation.
+subagents inherit none of this conversation - including the path to its own pack file,
+which is ./state/sourcedesk/<beat name slugified>.md. A beat whose pack is empty is not a
+quiet beat; it means the curated list had nothing and search matters more there.
 
 Then rank, verify, write ./briefs/<today>.md, and update the state files."""
+
+
+# ------------------------------------------------------------------ sourcedesk
+
+
+def sourcedesk_prepass(quiet: bool, hours: int | None = None) -> str:
+    """Fetch, deduplicate and pack the curated source list before the sweep.
+
+    Gives every researcher a verified starting point instead of a blind search.
+    Deliberately non-fatal: if the network is down or a feed misbehaves, the
+    agent still runs on search alone, because a stale pack is worth less than a
+    brief that never gets written.
+    """
+    if hours is None:
+        try:
+            from sourcedesk import miniyaml
+            cfg = miniyaml.load(PROJECT / "config.yaml")
+            monday = date.today().weekday() == 0
+            hours = int(cfg.get("monday_lookback_hours" if monday
+                                else "lookback_hours") or 24)
+        except Exception:
+            hours = 24
+
+    cmd = [sys.executable, "-m", "sourcedesk", "run",
+           "--hours", str(hours), "--pack", "--quiet", "--limit", "1"]
+    try:
+        out = subprocess.run(cmd, cwd=str(PROJECT), capture_output=True,
+                             text=True, timeout=420)
+    except subprocess.SubprocessError as e:
+        return f"sourcedesk skipped ({type(e).__name__}); researchers will search only"
+
+    lines = [ln for ln in (out.stderr or "").splitlines() if ln.strip()]
+    summary = next((ln for ln in lines if ln.startswith("packed ")), "")
+    fetched = next((ln for ln in lines if ln.startswith("fetched ")), "")
+    pulled = next((ln for ln in lines if ln.startswith("api pull")), "")
+    if out.returncode != 0 and not summary:
+        tail = lines[-1] if lines else "no output"
+        return f"sourcedesk failed ({tail}); researchers will search only"
+    return "  ·  ".join(x for x in (fetched, pulled, summary) if x)
 
 
 # ----------------------------------------------------------------------------- auth
@@ -229,7 +292,7 @@ def build_options(budget: float) -> ClaudeAgentOptions:
         # Python merges env into the inherited environment, so PATH survives.
         env={
             "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1",
-            "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "3",
+            "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "9",
         },
     )
 
@@ -243,6 +306,14 @@ def preflight() -> None:
         (PROJECT / d).mkdir(exist_ok=True)
     for f in ("state/covered.jsonl", "state/runs.jsonl"):
         (PROJECT / f).touch(exist_ok=True)
+
+    # EDGAR 403s every www.sec.gov path without a contact address in the
+    # User-Agent. Not fatal: feeds and the other handlers still work, so warn
+    # rather than block the run.
+    if not os.environ.get("SD_CONTACT_EMAIL"):
+        print("  note: SD_CONTACT_EMAIL is unset, so the SEC EDGAR pulls will be")
+        print("        skipped. Set it to a contact address SEC can reach:")
+        print("        export SD_CONTACT_EMAIL=you@yourdomain.com\n")
 
     mode, ok = auth_mode()
     if not ok:
@@ -370,11 +441,18 @@ async def main() -> None:
     ap.add_argument("--mode", choices=["daily", "weekly", "monthly", "earnings-week"])
     ap.add_argument("--cron", action="store_true", help="plain output, run once, exit")
     ap.add_argument("--budget", type=float, default=5.0, help="spend cap, API-key auth only")
+    ap.add_argument("--no-sourcedesk", action="store_true",
+                    help="skip the sourcedesk pre-pass; researchers search only")
     args = ap.parse_args()
 
     preflight()
     live = sys.stdout.isatty() and not args.cron
     mode, _ = auth_mode()
+
+    desk = ""
+    if not args.no_sourcedesk:
+        print("Sourcedesk pre-pass...", flush=True)
+        desk = sourcedesk_prepass(quiet=args.cron)
 
     prompt = TRIGGER
     if args.mode:
@@ -382,24 +460,62 @@ async def main() -> None:
 
     print(f"Daily brief agent  ·  opus-5 synthesizer, sonnet researchers")
     print(f"Auth: {mode}")
-    print(f"Project: {PROJECT}\n")
+    print(f"Project: {PROJECT}")
+    if desk:
+        print(f"Sourcedesk: {desk}")
+    print()
 
-    async with ClaudeSDKClient(options=build_options(args.budget)) as client:
-        await exchange(client, prompt, live)
+    try:
+        async with ClaudeSDKClient(options=build_options(args.budget)) as client:
+            await exchange(client, prompt, live)
 
-        if args.cron:
-            return
+            if not args.cron:
+                print("Follow-ups: /deeper <item>, /thesis check, /explain <term>, "
+                      "/interview, /build, /quiet. Blank line to quit.\n")
+                while True:
+                    try:
+                        line = (await asyncio.to_thread(input, "> ")).strip()
+                    except (EOFError, KeyboardInterrupt):
+                        break
+                    if not line:
+                        break
+                    await exchange(client, line, live)
+    finally:
+        # Runs even when the session ends on a budget cap or an SDK teardown error,
+        # which is exactly when the agent did not get to do it itself.
+        finish(args)
 
-        print("Follow-ups: /deeper <item>, /thesis check, /explain <term>, "
-              "/interview, /build, /quiet. Blank line to quit.\n")
-        while True:
-            try:
-                line = (await asyncio.to_thread(input, "> ")).strip()
-            except (EOFError, KeyboardInterrupt):
-                break
-            if not line:
-                break
-            await exchange(client, line, live)
+
+def finish(args: argparse.Namespace) -> None:
+    today = PROJECT / "briefs" / f"{date.today():%Y-%m-%d}.md"
+    if not today.exists():
+        print("No brief was written today.")
+        return
+
+    lint = subprocess.run([sys.executable, str(PROJECT / "lint.py"), "--fix", str(today)],
+                          capture_output=True, text=True)
+    if lint.stdout.strip():
+        print(lint.stdout.rstrip())
+
+    subprocess.run([sys.executable, str(PROJECT / "render.py"), str(today)],
+                   capture_output=True)
+    page = today.with_suffix(".html")
+    print(f"HTML: {page}")
+
+    # The agent appends its own run record at the end of a clean run. When it was cut
+    # short, write a minimal one so the log has no gaps.
+    runs = PROJECT / "state" / "runs.jsonl"
+    stamp = f"{date.today():%Y-%m-%d}"
+    existing = runs.read_text() if runs.exists() else ""
+    if f'"date": "{stamp}"' not in existing and f'"date":"{stamp}"' not in existing:
+        words = len(re.sub(r"https?://\S+", "", today.read_text()).split())
+        with runs.open("a") as fh:
+            fh.write(json.dumps({"date": stamp, "mode": args.mode or "daily",
+                                 "words": words, "truncated": True}) + "\n")
+        print("Run record was missing, appended a minimal one.")
+
+    if not args.cron:
+        subprocess.run(["open", str(page)], capture_output=True)
 
 
 if __name__ == "__main__":

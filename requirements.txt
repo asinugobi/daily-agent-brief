@@ -1,1 +1,2 @@
 claude-agent-sdk>=0.2.127
+markdown>=3.5

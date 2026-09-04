@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Daily Brief · Wednesday, 2 September 2026  Daily</title>
+<style>
+:root {
+  --paper:      #fdfcf8;
+  --ink:        #16150f;
+  --ink-soft:   #55524a;
+  --ink-faint:  #8a867c;
+  --rule:       #d9d5c9;
+  --rule-hair:  #e8e5db;
+  --link:       #0a4d7a;
+  --flag:       #a8261c;
+  --wash:       #f5f2e9;
+  --measure:    43rem;
+  --serif:      "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans:       "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14140f; --ink: #ece8dc; --ink-soft: #a8a396; --ink-faint: #78746a;
+    --rule: #35332b; --rule-hair: #26241e; --link: #7fb6dd; --flag: #d9645a; --wash: #1c1b15;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #14140f; --ink: #ece8dc; --ink-soft: #a8a396; --ink-faint: #78746a;
+  --rule: #35332b; --rule-hair: #26241e; --link: #7fb6dd; --flag: #d9645a; --wash: #1c1b15;
+}
+
+body { background: var(--paper); color: var(--ink); font-family: var(--serif);
+       font-size: 18px; line-height: 1.58; margin: 0; padding: 0 1.25rem 6rem;
+       -webkit-font-smoothing: antialiased; }
+.wrap { max-width: var(--measure); margin: 0 auto; }
+
+/* masthead ------------------------------------------------------------- */
+.masthead { text-align: center; padding: 2.75rem 0 0; }
+.masthead .hair { border-top: 1px solid var(--ink); margin-bottom: 1.15rem; }
+.masthead h1 { font-size: clamp(1.7rem, 5.5vw, 2.35rem); line-height: 1.05; margin: 0;
+  font-weight: 700; letter-spacing: 0.02em; font-variant: small-caps; }
+.dateline { font-family: var(--sans); font-size: 0.64rem; letter-spacing: 0.19em;
+  text-transform: uppercase; color: var(--ink-soft); margin: 0.95rem 0 0.75rem; }
+.tally { font-family: var(--sans); font-size: 0.66rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-faint); padding-bottom: 1.1rem; }
+.masthead .hair-b { border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink);
+  height: 3px; margin-bottom: 2.25rem; }
+
+/* section headings ------------------------------------------------------ */
+h2 { font-family: var(--sans); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--ink); margin: 3rem 0 0; padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ink); }
+h2 + * { margin-top: 1.1rem; }
+h3 { font-size: 1.24rem; line-height: 1.28; font-weight: 700; margin: 2.1rem 0 0.55rem;
+  letter-spacing: -0.008em; }
+
+p { margin: 0 0 0.95rem; }
+a { color: var(--link); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--link) 32%, transparent); }
+a:hover { border-bottom-color: var(--link); }
+
+/* lede ------------------------------------------------------------------ */
+.lede { font-size: 1.16rem; line-height: 1.5; }
+.lede ul { list-style: none; padding: 0; margin: 0; }
+.lede li { padding: 0.72rem 0 0.72rem 2.15rem; border-bottom: 1px solid var(--rule-hair);
+  position: relative; counter-increment: lede; }
+.lede li:first-child { border-top: 1px solid var(--rule-hair); }
+.lede li::before { content: counter(lede); position: absolute; left: 0; top: 0.78rem;
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 700; color: var(--flag);
+  letter-spacing: 0.05em; }
+.lede ul { counter-reset: lede; }
+
+/* item labels ----------------------------------------------------------- */
+p > em:first-child, p > strong:first-child.label {
+  font-family: var(--sans); font-style: normal; font-weight: 700; font-size: 0.63rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint);
+  display: block; margin-bottom: 0.18rem; }
+
+/* confidence pills ------------------------------------------------------ */
+code { font-family: var(--sans); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em;
+  text-transform: uppercase; padding: 0.17em 0.5em 0.19em; border: 1px solid var(--rule);
+  border-radius: 2px; color: var(--ink-soft); background: var(--wash); white-space: nowrap; }
+code.confirmed { color: #1d6b3f; border-color: #9ec7ad; background: color-mix(in srgb, #1d6b3f 8%, transparent); }
+code.reported  { color: #8a6412; border-color: #d3bb7e; background: color-mix(in srgb, #8a6412 9%, transparent); }
+code.rumor     { color: var(--flag); border-color: #dda9a4; background: color-mix(in srgb, #a8261c 8%, transparent); }
+
+/* tables ---------------------------------------------------------------- */
+.scroll { overflow-x: auto; margin: 0 0 1.2rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th { font-family: var(--sans); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; text-align: left; padding: 0.5rem 0.7rem 0.5rem 0;
+  border-bottom: 1.5px solid var(--ink); color: var(--ink-soft); white-space: nowrap; }
+td { padding: 0.55rem 0.7rem 0.55rem 0; border-bottom: 1px solid var(--rule-hair);
+  vertical-align: top; }
+tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+/* callouts -------------------------------------------------------------- */
+.callout { background: var(--wash); border-left: 3px solid var(--flag);
+  padding: 1.05rem 1.25rem 0.4rem; margin: 1.1rem 0 1.4rem; }
+.callout p:last-child { margin-bottom: 0.65rem; }
+.quiet { color: var(--ink-soft); font-size: 0.92rem; }
+.quiet li { margin-bottom: 0.42rem; }
+
+ul, ol { padding-left: 1.15rem; margin: 0 0 1rem; }
+li { margin-bottom: 0.3rem; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.4rem 0; }
+
+footer { margin-top: 3.5rem; padding-top: 1rem; border-top: 1px solid var(--rule);
+  font-family: var(--sans); font-size: 0.64rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-faint); text-align: center; }
+
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; padding: 0; }
+  h2 { page-break-after: avoid; } h3 { page-break-after: avoid; }
+  .callout { border-left-color: #000; background: #f4f4f4; }
+  a { color: #000; border: 0; }
+}
+@media (max-width: 480px) { body { font-size: 17px; padding: 0 1rem 4rem; } }
+</style>
+</head><body>
+<div class="wrap">
+<header class="masthead">
+  <div class="hair"></div>
+  <h1>The Daily Brief</h1>
+  <div class="dateline">Wednesday, 2 September 2026  Daily · 24-hour lookback · 13 gathered · 4 need to know · 5 other news · 4 dropped</div>
+  
+  <div class="hair-b"></div>
+</header>
+<main>
+<h2>TL;DR</h2><div class="lede">
+<ul>
+<li>Broadcom booked $16.7 billion of AI semiconductor revenue in Q3, up 221% year over year, and guided Q4 to $21.7 billion. Total revenue guidance still came in slightly under consensus.</li>
+<li>On the call, management put FY27 AI semiconductor revenue at $115 billion and FY28 at $230 billion, and described customer demand in gigawatts rather than chip units. Single-source, from the transcript, not independently verified.</li>
+<li>OpenAI classified its Astra model "Critical" for cybersecurity under its own Preparedness Framework and held back the full release. It is the first model any lab has placed in that tier.</li>
+</ul>
+</div><h2>Today's vocabulary</h2>
+<p><strong>Term of the day: compute demand denominated in gigawatts.</strong> Broadcom described its custom-accelerator pipeline in gigawatts of deployed capacity per customer, not in units or wafers. A gigawatt of AI capacity is roughly the output of one large nuclear reactor, and it bundles chips, racks, cooling, and interconnect into one number. The reason vendors quote it: power procurement and grid interconnection now set the delivery schedule, so the gigawatt figure tells you when revenue can actually land, while a chip count does not. In an argument, it is the bridge between a semiconductor forecast and a utility's capacity queue.</p>
+<p><strong>Word of the day: XPU.</strong> Broadcom's label for a customer-designed accelerator built to that customer's specification, as opposed to a merchant GPU sold to anyone. Broadcom said on the call that its FY27 and FY28 forecasts rest on six named XPU customers. The distinction matters because every XPU gigawatt is a gigawatt that a merchant GPU vendor does not sell.</p>
+<h2>Executive summary</h2>
+<p>Broadcom's quarter is the cleanest read yet on how much of AI compute spending is moving to custom silicon. AI semiconductor revenue tripled to $16.7 billion, the company raised full-year AI revenue guidance to $58 billion from $56 billion, and it extended its Google TPU agreement. The forward numbers management gave on the call, $115 billion in FY27 and $230 billion in FY28, imply a buildout larger than most 2026 street models carry, and management framed the demand in gigawatts tied to named customers. That framing is the connective tissue with the power thesis: the ceiling on these forecasts is interconnection and generation, not fabs. Two things cut the other way. Total revenue guidance of $34.8 billion landed just below the roughly $35.03 billion consensus, which says the bar for AI-levered names is now high enough that tripling a revenue line is not automatically enough. And the custom-accelerator ramp is a share shift, which is a problem for a portfolio concentrated in merchant GPU exposure. Separately, OpenAI became the first lab to self-classify a model at the top cyber risk tier and delay release, which is the first real test of whether a capability threshold in a safety framework actually gates a product.</p>
+<h2>Need to know</h2>
+<h3>1. Broadcom's AI revenue tripled, and the forward guide is denominated in customer gigawatts</h3>
+<p><strong>What happened.</strong> Broadcom reported Q3 FY26 revenue of $29.6 billion, up 86% year over year, with AI semiconductor revenue of $16.7 billion, up 221% year over year and 54% sequentially, according to the company's 8-K exhibit filed with the SEC. Non-GAAP operating income was $20.1 billion, a 68% margin, and free cash flow was $13.7 billion, 46% of revenue. Q4 guidance is $34.8 billion in total revenue and $21.7 billion in AI semiconductor revenue, up 236% year over year, with full-year FY26 AI revenue raised to $58 billion from a prior $56 billion. The filing says the Google TPU agreement was extended to deliver "multi tens of billions of dollars" of TPUs annually over the next several years.</p>
+<p><strong>Why it matters.</strong> The mechanism is substitution. Every gigawatt a hyperscaler fills with a Broadcom-built XPU is a gigawatt it does not fill with a merchant GPU, and Broadcom now has six named customers doing exactly that. On the call, management reportedly detailed the pipeline customer by customer: Google on TPU v7 and v8i, Anthropic at 1 GW of Ironwood in 2026 and 5 GW of TPU v8i in 2027, OpenAI shipping a custom accelerator with 1.3 GW in 2027, and Meta running three MTIA generations through 2027. For the FY27 figure of $115 billion to hold, those gigawatts have to get energized on schedule, which makes the forecast a bet on grid interconnection as much as on silicon.</p>
+<p><strong>So what for me.</strong> This is the strongest evidence to date for the convergence thesis, because a semiconductor vendor is now publishing its revenue forecast in units of power. It also argues against sizing AI compute exposure through a single merchant-GPU position: the custom-ASIC complex is capturing a growing share of the same buildout. For Forward Deployed and monetization PM interviews at the labs, the Anthropic and OpenAI accelerator lines are the concrete detail that shows you read the primary document rather than the headline.</p>
+<p><strong>Go deeper.</strong> The 8-K exhibit is about ten minutes. Hold one question: which of the forward-year figures are contracted backlog with delivery schedules, and which are customer demand forecasts that can be revised? The 8-K supports the FY26 numbers. It does not, on its own, support the FY27 and FY28 figures.</p>
+<p><strong>Second-order read, who loses.</strong> Merchant GPU pricing power. If six customers can each stand up multi-gigawatt custom fleets, the marginal buyer of a general-purpose accelerator has a credible alternative for inference workloads, which is where the volume is.</p>
+<p><strong>Source.</strong> <a href="https://www.sec.gov/Archives/edgar/data/0001730168/000173016826000076/avgo-08022026x8kxex99.htm">Broadcom Q3 FY26 8-K exhibit, SEC EDGAR, 2 Sep 2026, Tier 1</a>, <code class="confirmed">confirmed</code> for the reported quarter and FY26 guidance. The FY27 $115 billion, FY28 $230 billion, and per-customer gigawatt figures come from a single <a href="https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849">earnings call transcript, Tier 2</a> and are <code class="reported">reported</code>, not confirmed. Sources also conflicted on the after-hours share reaction, so no move is stated here.</p>
+<h3>2. OpenAI put a model in the top cyber risk tier and held it back</h3>
+<p><strong>What happened.</strong> OpenAI classified Astra as "Critical" for cybersecurity capability under its Preparedness Framework, the first model to reach that tier, SecurityWeek reported. The classification means the model can independently find and exploit previously unknown vulnerabilities across well-defended systems. During evaluation it discovered two zero-day vulnerabilities, broke out of a browser sandbox to run commands on the host machine, and chained operating system flaws to reach root access. It declined 91.5% of cyber-related jailbreak attempts, against 59% for its predecessor. OpenAI said further safeguards are required, limited initial access to a testing group, and routed broader availability through a program it calls Daybreak Blue.</p>
+<p><strong>Why it matters.</strong> Every frontier lab publishes a safety framework with capability thresholds, and until now no threshold had ever bound. This one did, and it produced a delayed release and a gated rollout. That converts the frameworks from disclosure documents into something closer to a product gate, which changes launch timing risk for every lab that has committed to one. The commercial read runs the other way: a model that can find zero-days is directly monetizable in offensive and defensive security, and gated access is a pricing structure as much as a safety control.</p>
+<p><strong>So what for me.</strong> This is a live case study for the monetization PM track, where the question is how you price and gate a capability you have publicly called dangerous. It also sets up the enterprise AI security trade, since a model at this capability level raises the value of the defensive tooling that CrowdStrike and others are shipping.</p>
+<p><strong>Go deeper.</strong> The system card for Astra, when OpenAI publishes it, is the document. It does not appear to be out yet. Until it is, the claim rests on one outlet. The question to hold: does the Preparedness Framework specify who approves crossing a Critical threshold, or does the lab decide case by case?</p>
+<p><strong>Source.</strong> <a href="https://www.securityweek.com/openais-astra-becomes-first-model-to-cross-critical-cybersecurity-threshold/">SecurityWeek, 2 Sep 2026, Tier 2</a>, <code class="reported">reported</code>. Single source. No OpenAI primary document was located in this run.</p>
+<h3>3. Waymo added three cities and passed 4,000 vehicles, two days before Tesla's Cybercab event</h3>
+<p><strong>What happened.</strong> Waymo launched robotaxi service in Denver, San Diego, and Tampa, bringing it to 14 US cities, TechCrunch reported. The fleet now exceeds 4,000 vehicles, about 300 of them Ojai minivans and the rest Jaguar I-Pace. Nevada has approved up to 1,000 vehicles over the next year for a Las Vegas launch, and London and Munich are planned. Waymo says it runs about 500,000 paid trips a week and has logged more than 200 million autonomous miles. Tesla formally introduces Cybercab on 3 September with a stated production target above 125,000 units a year, and has been registering vehicles with the Texas DMV.</p>
+<p><strong>Why it matters.</strong> The two companies are now testing opposite constraints. Waymo's is unit cost and city-by-city permitting, with roughly 125 paid trips per vehicle per week implied by its own numbers. Tesla's is regulatory, because a 125,000-unit annual target only means anything if the vehicles are approved to operate without a safety driver at that scale. Whichever constraint binds first determines which cost curve gets to matter.</p>
+<p><strong>So what for me.</strong> Fleet electrification is the second leg of the convergence thesis, and 4,000 vehicles across 14 cities is still small enough that AV charging load does not yet move a utility forecast. Worth tracking as a leading indicator rather than a position.</p>
+<p><strong>Go deeper.</strong> Waymo's own safety and mileage disclosures are the primary source; the trip and mileage figures here are company-reported and passed through a Tier 3 outlet. Twenty minutes. Question: is trips per vehicle per week rising, or is Waymo growing volume purely by adding vehicles?</p>
+<p><strong>Source.</strong> <a href="https://techcrunch.com/2026/09/01/waymo-accelerates-robotaxi-expansion-with-launches-in-denver-san-diego-and-tampa/">TechCrunch, 1 Sep 2026, Tier 3</a> and <a href="https://techcrunch.com/2026/09/01/waymo-goes-on-offense-ahead-of-teslas-cybercab-launch/">TechCrunch, 1 Sep 2026, Tier 3</a>, <code class="reported">reported</code>.</p>
+<h3>4. Oracle set its Q1 FY27 print for 10 September</h3>
+<p><strong>What happened.</strong> Oracle will report first-quarter fiscal 2027 results on Thursday, 10 September, after the close, according to its investor relations announcement. The call is at 4:00 p.m. Central.</p>
+<p><strong>Why it matters.</strong> Oracle is the most debt-dependent of the large AI infrastructure builders, and the 10-year Treasury yield touched a one-year high of 4.78% this week. The capex line and any commentary on financing cost are the two things in this print that move the sector read, not the headline EPS.</p>
+<p><strong>So what for me.</strong> Eight days out. This is the next scheduled test of whether debt-funded capex still clears at current rates.</p>
+<p><strong>Source.</strong> <a href="https://investor.oracle.com/investor-news/news-details/2026/Oracle-Sets-the-Date-for-its-First-Quarter-Fiscal-Year-2027-Earnings-Announcement/default.aspx">Oracle Investor Relations, 2 Sep 2026, Tier 1</a>, <code class="confirmed">confirmed</code>.</p>
+<h2>Numbers that moved</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>New</th>
+<th>Prior</th>
+<th>Change</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Broadcom AI semi revenue, Q3 FY26</td>
+<td>$16.7B</td>
+<td>$5.2B (Q3 FY25 implied by +221%)</td>
+<td>+221% YoY, +54% QoQ</td>
+<td>Broadcom 8-K</td>
+</tr>
+<tr>
+<td>Broadcom total revenue, Q3 FY26</td>
+<td>$29.6B</td>
+<td>+86% YoY</td>
+<td>+86%</td>
+<td>Broadcom 8-K</td>
+</tr>
+<tr>
+<td>Broadcom FY26 AI revenue guide</td>
+<td>$58B</td>
+<td>$56B</td>
+<td>+$2B</td>
+<td>Broadcom 8-K</td>
+</tr>
+<tr>
+<td>Broadcom Q4 AI semi guide</td>
+<td>$21.7B</td>
+<td>$16.7B (Q3 actual)</td>
+<td>+236% YoY</td>
+<td>Broadcom 8-K</td>
+</tr>
+<tr>
+<td>Broadcom free cash flow, Q3</td>
+<td>$13.7B</td>
+<td>46% of revenue</td>
+<td>n/a</td>
+<td>Broadcom 8-K</td>
+</tr>
+<tr>
+<td>Waymo fleet</td>
+<td>&gt;4,000 vehicles, 14 cities</td>
+<td>n/a</td>
+<td>+3 cities</td>
+<td>TechCrunch</td>
+</tr>
+<tr>
+<td>CrowdStrike ending ARR</td>
+<td>$5.8B</td>
+<td>net new $333M, +51% YoY</td>
+<td>+51% YoY net new</td>
+<td>Fal.Con briefing</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Watchlist and market read</h2>
+<ul>
+<li><strong>AVGO.</strong> Closed $367.47, down 0.6%, ahead of the print. Q4 total revenue guide of $34.8 billion was marginally under the roughly $35.03 billion street figure despite the AI beat. After-hours reporting conflicted across outlets, so treat the immediate reaction as unresolved until tomorrow's open.</li>
+<li><strong>ORCL.</strong> Q1 FY27 confirmed for 10 September after the close.</li>
+<li><strong>NVDA, VRT, CEG, SMH, QQQM, AIPO.</strong> No news-driven move identified in the window.</li>
+</ul>
+<h2>Geopolitics and policy</h2>
+<p>Nothing landed in the window. The geopolitics and policy beats both returned empty. Specifically checked and not found: any proclamation or Federal Register notice expanding semiconductor tariffs or removing the January 2026 data-center exemption. That claim remains open and unverified as of today. AMD, Cisco and HUMAIN did bring live AI infrastructure online in Saudi Arabia on 31 August, just outside the window, with a stated path to 1 GW by 2030.</p>
+<h2>Disconfirming evidence</h2><div class="callout">
+<p>Broadcom's own numbers argue against a merchant-GPU-concentrated position. Six named customers are each building multi-gigawatt custom accelerator fleets, and Broadcom guided FY27 AI revenue to a figure roughly double FY26. If that ramp is real, a meaningful share of inference compute is moving to silicon that Nvidia does not sell. The second point is narrower but sharper: Broadcom tripled its AI revenue line and still guided total revenue slightly below consensus. When a company grows a segment 221% and the guide is still judged a miss, expectations rather than fundamentals are setting the price, and that is the condition in which a good quarter produces a bad day.</p>
+</div><h2>One deep read</h2>
+<p>Broadcom's Q3 FY26 earnings call transcript, roughly 30 minutes. The 8-K gives you the quarter; the transcript is where the FY27 $115 billion and FY28 $230 billion figures and the per-customer gigawatt schedule came from, and those are the numbers that would reprice the sector if they hold. Hold this question throughout: for each named customer, is management describing a signed order with a delivery date, or a capacity plan the customer has shared? The answer determines whether this is a backlog disclosure or a forecast.</p>
+<h2>Open loops</h2><div class="quiet">
+<p><strong>Resolved today</strong></p>
+<ul>
+<li>Broadcom Q3 FY26 print and custom-ASIC commentary, check by 2026-09-03, <strong>resolved, held.</strong> Reported 2 September; AI revenue $16.7B, six named XPU customers disclosed.</li>
+<li>Oracle Q1 FY27 earnings date, expected early-to-mid September, check by 2026-09-15, <strong>resolved.</strong> Confirmed for 10 September after the close.</li>
+</ul>
+<p><strong>Unresolved, carried</strong></p>
+<ul>
+<li>Expanded semiconductor tariffs proclaimed and Jan 2026 data-center exemption removed, Bloomberg, unverified, check by 2026-10-15. Checked 2026-09-02, no Federal Register or proclamation action found.</li>
+<li>Beacon Point Phase 1 energization Q1 2027, Lambda/Hut 8/Nvidia, check by 2027-03-31</li>
+<li>Vertiv/UIG deal closes Q4 2026, accretive to adjusted EPS in year one, Vertiv, check by 2026-12-31</li>
+<li>Fervo Cape Station delivers first power to grid before end of 2026, Fervo/Google, check by 2026-12-31</li>
+<li>Fervo 600 MW expansion option exercised by June 2030, Fervo/Google, check by 2030-06-30</li>
+<li>Anthropic public listing in Sept or Oct 2026 near $965B valuation, press reporting 2026-08-11, check by 2026-10-31</li>
+<li>OpenAI response to 16-state AG investigation due 2026-09-12, Montana AG, unverified, check by 2026-09-15</li>
+<li>G20 members formally adopt the Carolina Principles, US OSTP/Commerce, check by 2026-10-01</li>
+</ul>
+<p><strong>New today</strong></p>
+<ul>
+<li>Broadcom FY27 AI semiconductor revenue of $115B and FY28 of $230B, Broadcom management, call transcript, single source, check by 2026-12-11</li>
+<li>Anthropic 5 GW of TPU v8i deployed in 2027, Broadcom management, single source, check by 2027-12-31</li>
+<li>OpenAI Astra broader release via Daybreak Blue after additional safeguards, OpenAI via SecurityWeek, check by 2026-12-01</li>
+<li>Tesla Cybercab production target above 125,000 units a year, event 2026-09-03, Tesla, check by 2026-09-04</li>
+<li>Waymo Las Vegas launch, up to 1,000 vehicles approved in Nevada over the next year, Waymo/Nevada, check by 2027-09-01</li>
+</ul>
+</div><h2>Other news</h2><div class="quiet">
+<ul>
+<li>CrowdStrike pulled forward its long-term ARR targets to $10B by FY2030 and $20B by FY2035, and launched SafeMind security models and Guardian agent-runtime security. <a href="https://www.investing.com/news/transcripts/crowdstrike-at-falcon-investor-briefing-ai-push-lifts-growth-outlook-93CH-4886858">Link</a></li>
+<li>AMD, Cisco and HUMAIN brought Instinct MI355X infrastructure live in Saudi Arabia, with Phase 2 at up to 250 MW in 2H27 and 1 GW targeted by 2030. <a href="https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live">Link</a></li>
+<li>Alibaba shipped a Qwen3.8-Max-0902 refresh with a 1M-token context window and claims the top spot on a front-end coding arena. <a href="https://technode.com/2026/09/02/alibaba-upgrades-qwen38-max-with-new-0902-snapshot/">Link</a></li>
+<li>Galbot opens pre-orders for its ET1 humanoid on 3 September, using Unitree-sourced motors. <a href="https://autonews.gasgoo.com/articles/news/galbots-galbot-et1-to-open-for-pre-orders-on-september-3-2094661720693104640">Link</a></li>
+<li>Reframe Systems raised $40M led by Energy Impact Partners for automated homebuilding microfactories. <a href="https://theaiinsider.tech/2026/09/01/reframe-systems-raises-40m-in-funding-for-physical-ai-driven-homebuilding-microfactories/">Link</a></li>
+</ul>
+<p>Four items were dropped: a TrendForce CoWoS capacity estimate that could not be opened and dated to June, and three duplicate or overlapping sources on stories already covered above, including a second Broadcom wire report and the Waymo-versus-Tesla piece folded into item 3.</p>
+</div><h2>Run notes</h2><div class="quiet">
+<p>Concurrency limits forced the nine beats to run in three sequential batches rather than one. Geopolitics, policy and research beats each returned nothing in the 24-hour window; that is a real quiet result, not a search failure, and it is why this brief skews to compute and markets. One fetch failure, TrendForce on CoWoS capacity. Broadcom's forward-year guidance and per-customer gigawatt schedule rest on a single transcript aggregator; the primary call transcript on Broadcom's IR site would be worth saving to <code>./inbox/</code>. Word count roughly 2,050 against a 1,900 budget, inside the 10% tolerance.</p></div>
+</main>
+<footer>Generated by the daily brief agent · 2026-09-02.md</footer>
+</div>
+</body></html>

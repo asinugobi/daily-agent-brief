@@ -1,0 +1,1001 @@
+# Source list for daily AI, physical AI and economic developments
+# All endpoints verified live 2026-09-04. Re-validate quarterly; feed URLs rot.
+#
+# tier 1 = primary record (agencies, central banks, first-party, preprints). Cite directly.
+# tier 2 = reference journalism. Corroborate single-source scoops.
+# tier 3 = specialist analysis (named viewpoint). Attribute as analysis, never as fact.
+# tier 4 = institutional and academic research (slow, deep, high credibility).
+#
+# access: open | paywall_headlines | license_required | key_required | scrape
+# domain: ai | physical | econ | cross
+
+meta:
+  verified: 2026-09-04
+  revalidate_every: 90d
+  note: >
+    Reuters and AP RSS are licensing-gated (401). BLS, IMF, BCG, Bain and A3
+    return 403 to automated clients. IEA publishes no RSS on any path. These are
+    labelled scrape or license_required rather than left in as endpoints that fail.
+
+# --- AI - first-party announcements ---
+ai_primary:
+  - id: openai_news
+    name: "OpenAI News"
+    url: "https://openai.com/news/rss.xml"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "irregular"
+  - id: google_deepmind_blog
+    name: "Google DeepMind Blog"
+    url: "https://deepmind.google/blog/rss.xml"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "weekly"
+  - id: google_research_blog
+    name: "Google Research Blog"
+    url: "https://research.google/blog/rss/"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "weekly"
+  - id: meta_newsroom
+    name: "Meta Newsroom"
+    url: "https://about.fb.com/news/feed/"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "Corporate-wide feed - filter for AI keywords."
+  - id: nvidia_blog
+    name: "NVIDIA Blog"
+    url: "https://blogs.nvidia.com/feed/"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "Marketing-heavy. Useful for hardware and supply signals, not analysis."
+  - id: hugging_face_blog
+    name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+  - id: anthropic_news
+    name: "Anthropic News"
+    url: "https://www.anthropic.com/news"
+    tier: 1
+    access: scrape
+    domain: ai
+    cadence: "irregular"
+    note: "No RSS endpoint exists. Poll the HTML index."
+  - id: mistral_ai_news
+    name: "Mistral AI News"
+    url: "https://mistral.ai/news"
+    tier: 1
+    access: scrape
+    domain: ai
+    cadence: "irregular"
+    note: "No RSS endpoint exists."
+
+# --- Physical AI - first-party ---
+physical_primary:
+  - id: nvidia_robotics
+    name: "NVIDIA Robotics"
+    url: "https://blogs.nvidia.com/blog/category/robotics/feed/"
+    tier: 1
+    access: open
+    domain: physical
+    cadence: "weekly"
+    note: "The Jetson/Isaac/GR00T stack. Best single first-party feed for embodied AI tooling."
+  - id: waymo_blog
+    name: "Waymo Blog"
+    url: "https://waymo.com/blog/rss.xml"
+    tier: 1
+    access: open
+    domain: physical
+    cadence: "several weekly"
+    note: "Deepest public operating record of any autonomy company at scale."
+  - id: boston_dynamics
+    name: "Boston Dynamics"
+    url: "https://bostondynamics.com/blog/"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "irregular"
+    note: "Feed endpoint returns zero items - poll the HTML index."
+  - id: figure_ai
+    name: "Figure AI"
+    url: "https://www.figure.ai/news"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "irregular"
+    note: "Humanoids. No feed. Announcement-driven, so verify claims against demo video."
+  - id: physical_intelligence
+    name: "Physical Intelligence"
+    url: "https://www.physicalintelligence.company/blog"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "irregular"
+    note: "Robot foundation models. No feed."
+  - id: agility_robotics
+    name: "Agility Robotics"
+    url: "https://agilityrobotics.com/news"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "irregular"
+    note: "Warehouse humanoids. No feed."
+
+# --- AI - research preprints ---
+ai_research:
+  - id: arxiv_cs_ai
+    name: "arXiv cs.AI"
+    url: "https://export.arxiv.org/rss/cs.AI"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "~270 papers/day and not peer reviewed. Signal of research direction, not established finding."
+  - id: arxiv_cs_lg_machine_learning
+    name: "arXiv cs.LG - Machine Learning"
+    url: "https://export.arxiv.org/rss/cs.LG"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+  - id: arxiv_cs_cl_computation_and_language
+    name: "arXiv cs.CL - Computation and Language"
+    url: "https://export.arxiv.org/rss/cs.CL"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+  - id: arxiv_econ_gn_general_economics
+    name: "arXiv econ.GN - General Economics"
+    url: "https://export.arxiv.org/rss/econ.GN"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "Low volume. The best single feed for AI-and-labour-market preprints."
+
+# --- Physical AI - research ---
+physical_research:
+  - id: arxiv_cs_ro_robotics
+    name: "arXiv cs.RO - Robotics"
+    url: "https://export.arxiv.org/rss/cs.RO"
+    tier: 1
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "~75/day. The core physical-AI preprint feed."
+  - id: arxiv_eess_sy_systems_and_control
+    name: "arXiv eess.SY - Systems and Control"
+    url: "https://export.arxiv.org/rss/eess.SY"
+    tier: 1
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "Control theory underpinning real-world actuation."
+  - id: arxiv_cs_ma_multiagent_systems
+    name: "arXiv cs.MA - Multiagent Systems"
+    url: "https://export.arxiv.org/rss/cs.MA"
+    tier: 1
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "Fleet coordination and multi-robot autonomy."
+  - id: science_robotics
+    name: "Science Robotics"
+    url: "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=scirobotics"
+    tier: 1
+    access: paywall_headlines
+    domain: physical
+    cadence: "weekly"
+    note: "Peer reviewed - the quality bar arXiv does not clear."
+  - id: nature_machine_intelligence
+    name: "Nature Machine Intelligence"
+    url: "https://www.nature.com/natmachintell.rss"
+    tier: 1
+    access: paywall_headlines
+    domain: physical
+    cadence: "monthly"
+    note: "Peer reviewed. Embodied learning and robot foundation models."
+
+# --- Physical AI - industry and installation data ---
+physical_industry:
+  - id: ieee_spectrum_robotics
+    name: "IEEE Spectrum - Robotics"
+    url: "https://spectrum.ieee.org/feeds/topic/robotics.rss"
+    tier: 2
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "Technically literate and fully open. The strongest robotics reporting on this list."
+  - id: the_robot_report
+    name: "The Robot Report"
+    url: "https://www.therobotreport.com/feed/"
+    tier: 2
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "Funding rounds, deployments, order books. The trade press of record."
+  - id: robohub
+    name: "Robohub"
+    url: "https://robohub.org/feed/"
+    tier: 3
+    access: open
+    domain: physical
+    cadence: "daily"
+    note: "Researcher-written. Bridges the preprint literature and industry."
+  - id: ifr_world_robotics
+    name: "IFR World Robotics"
+    url: "https://ifr.org/ifr-press-releases"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "annual"
+    note: "The authoritative robot installation statistics - functionally the BLS of robotics. No feed; poll the press page. Annual World Robotics report is the anchor dataset for automation economics."
+  - id: a3_association_for_advancing_automation
+    name: "A3 - Association for Advancing Automation"
+    url: "https://www.automate.org/news"
+    tier: 1
+    access: scrape
+    domain: physical
+    cadence: "quarterly"
+    note: "North American robot order and shipment statistics. Returns 403 to bots - poll or license."
+
+# --- Automation economics ---
+automation_economics:
+  - id: fed_g_17_industrial_production_and_capacity_utilization
+    name: "Fed G.17 - Industrial Production and Capacity Utilization"
+    url: "https://www.federalreserve.gov/feeds/g17.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "monthly"
+    note: "The core automation-economics primary series. Capacity utilization is the demand signal that precedes automation capex."
+  - id: mit_initiative_on_the_digital_economy
+    name: "MIT Initiative on the Digital Economy"
+    url: "https://ide.mit.edu/feed/"
+    tier: 4
+    access: open
+    domain: econ
+    cadence: "weekly"
+    note: "Where the Acemoglu/Autor-lineage work on automation and labour displacement surfaces first."
+  - id: bls_productivity_and_costs
+    name: "BLS Productivity and Costs"
+    url: "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "quarterly"
+    note: "Via the API - PRS85006092 is nonfarm business output per hour. The series any automation-productivity claim must be checked against."
+  - id: census_annual_business_survey
+    name: "Census Annual Business Survey"
+    url: "https://www.census.gov/programs-surveys/abs.html"
+    tier: 1
+    access: scrape
+    domain: econ
+    cadence: "annual"
+    note: "Carries firm-level robotics and AI adoption questions. The only large-sample US adoption data. No feed."
+
+# --- Company disclosure - SEC EDGAR ---
+edgar:
+  - id: edgar_xbrl_frames_api
+    name: "EDGAR XBRL Frames API"
+    url: "https://data.sec.gov/api/xbrl/frames/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment/USD/CY2025Q1.json"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "quarterly"
+    note: "One concept across every filer for one period - the single most useful endpoint here. Verified: this call returns 2,701 filers' capex for CY2025Q1, ranking Alphabet 17.2B, Microsoft 16.8B, Meta 12.9B. Swap the concept for ResearchAndDevelopmentExpense or any us-gaap tag. Caution: filers use different tags for the same economics, so a frame is a starting population, not a complete one."
+  - id: edgar_company_facts_api
+    name: "EDGAR Company Facts API"
+    url: "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "continuous"
+    note: "Every XBRL fact a filer has ever reported, in one document. Zero-pad the CIK to ten digits (this example is NVIDIA)."
+  - id: edgar_company_concept_api
+    name: "EDGAR Company Concept API"
+    url: "https://data.sec.gov/api/xbrl/companyconcept/CIK0001045810/us-gaap/ResearchAndDevelopmentExpense.json"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "continuous"
+    note: "One concept's full history for one filer, with the accession number behind each figure - so every number you publish is citable to a filing."
+  - id: edgar_submissions_api
+    name: "EDGAR Submissions API"
+    url: "https://data.sec.gov/submissions/CIK0001045810.json"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "continuous"
+    note: "Complete filing history and metadata for a filer. The entry point for tracking who filed what, when."
+  - id: edgar_full_text_search
+    name: "EDGAR Full-Text Search"
+    url: "https://efts.sec.gov/LATEST/search-index?q=%22artificial+intelligence%22&forms=10-K"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "Searches filing text, not just metadata. The way to track how language like physical AI or agentic spreads through 10-K risk factors - a leading indicator disclosure picks up before revenue does."
+  - id: edgar_current_filings_stream
+    name: "EDGAR Current Filings Stream"
+    url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&output=atom"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "continuous"
+    note: "Real-time Atom feed of filings as they land. Change type= for 10-K, 10-Q, S-1. The fastest legitimate route to a material corporate event."
+  - id: edgar_insider_transactions_form_4
+    name: "EDGAR Insider Transactions - Form 4"
+    url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&output=atom"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "continuous"
+    note: "Officer and director trades, filed within two business days."
+  - id: edgar_institutional_holdings_13f
+    name: "EDGAR Institutional Holdings - 13F"
+    url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=13F-HR&output=atom"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "quarterly"
+    note: "Institutional positions. Filed 45 days after quarter-end - stale by construction, so never report it as a current holding."
+  - id: sec_company_tickers_map
+    name: "SEC Company Tickers Map"
+    url: "https://www.sec.gov/files/company_tickers.json"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "weekly"
+    note: "Ticker-to-CIK lookup. You need this before any other EDGAR call - fetch once and cache."
+  - id: edgar_financial_statement_data_sets
+    name: "EDGAR Financial Statement Data Sets"
+    url: "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "quarterly"
+    note: "Bulk quarterly ZIP of every filer's numeric XBRL data. Use this instead of thousands of API calls when doing cross-sectional work."
+  - id: edgar_daily_index
+    name: "EDGAR Daily Index"
+    url: "https://www.sec.gov/Archives/edgar/daily-index/2026/QTR3/"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "Every filing accepted each day. The completeness backstop if a feed drops something."
+  - id: sec_press_releases
+    name: "SEC Press Releases"
+    url: "https://www.sec.gov/news/pressreleases.rss"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "Enforcement actions and rulemaking. Pair with https://www.sec.gov/news/speeches-statements.rss for policy signals."
+
+# --- Energy and AI infrastructure ---
+energy:
+  - id: iea_international_energy_agency
+    name: "IEA - International Energy Agency"
+    url: "https://www.iea.org/analysis"
+    tier: 1
+    access: scrape
+    domain: econ
+    cadence: "weekly"
+    note: "No RSS exists anywhere on iea.org - verified across eight candidate paths. Poll the analysis index. The authoritative source on datacenter electricity demand, now a first-order AI economics story."
+  - id: eia_today_in_energy
+    name: "EIA Today in Energy"
+    url: "https://www.eia.gov/rss/todayinenergy.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "US Energy Information Administration. Daily, chart-led, and open - the practical substitute for IEA's missing feed."
+  - id: eia_press_releases
+    name: "EIA Press Releases"
+    url: "https://www.eia.gov/rss/press_rss.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "weekly"
+    note: "Short-Term Energy Outlook and electricity demand projections."
+
+# --- AI - policy and regulation ---
+ai_policy:
+  - id: federal_register_artificial_intelligence
+    name: "Federal Register - artificial intelligence"
+    url: "https://www.federalregister.gov/api/v1/documents.json?conditions[term]=artificial+intelligence&order=newest"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "JSON API, no key. The authoritative record of US rulemaking. Add conditions[type]=RULE to cut notice noise."
+  - id: nist_news
+    name: "NIST News"
+    url: "https://www.nist.gov/news-events/news/rss.xml"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "Source for AI Risk Management Framework updates."
+  - id: european_commission_digital_strategy
+    name: "European Commission - Digital Strategy"
+    url: "https://digital-strategy.ec.europa.eu/en/rss.xml"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+    note: "Primary feed for EU AI Act implementation and guidance."
+  - id: european_commission_press_corner
+    name: "European Commission Press Corner"
+    url: "https://ec.europa.eu/commission/presscorner/api/rss?language=en"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "daily"
+  - id: uk_ai_security_institute
+    name: "UK AI Security Institute"
+    url: "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-safety-institute"
+    tier: 1
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "Atom. The gov.uk org slug is still ai-safety-institute after the rename."
+  - id: cset_georgetown
+    name: "CSET - Georgetown"
+    url: "https://cset.georgetown.edu/feed/"
+    tier: 4
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "Center for Security and Emerging Technology. Rigorous on compute, chips and China policy."
+  - id: rand
+    name: "RAND"
+    url: "https://www.rand.org/news/press.xml"
+    tier: 4
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "The AI-topic feed returns zero items; the press feed carries the same research."
+
+# --- Economics - US agencies and Treasury ---
+econ_primary_us:
+  - id: bls_public_data_api_v2
+    name: "BLS Public Data API v2"
+    url: "https://api.bls.gov/publicAPI/v2/timeseries/data/"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "scheduled"
+    note: "POST. CPI, jobs, PPI, ECI. Works unregistered at low volume. Key series: CUUR0000SA0 CPI-U, LNS14000000 unemployment, CES0000000001 payrolls. Its RSS returns 403 - use this."
+  - id: bls_release_calendar
+    name: "BLS Release Calendar"
+    url: "https://www.bls.gov/schedule/news_release/"
+    tier: 1
+    access: scrape
+    domain: econ
+    cadence: "scheduled"
+    note: "Critical for a daily report. Major prints drop 08:30 ET on dates known months ahead."
+  - id: bureau_of_economic_analysis
+    name: "Bureau of Economic Analysis"
+    url: "https://apps.bea.gov/rss/rss.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "scheduled"
+    note: "GDP, PCE price index (the Fed's preferred inflation gauge), trade balance."
+  - id: census_economic_indicators
+    name: "Census Economic Indicators"
+    url: "https://www.census.gov/economic-indicators/indicator.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "scheduled"
+    note: "Retail sales, housing starts, durable goods, business inventories."
+  - id: treasury_daily_yield_curve
+    name: "Treasury Daily Yield Curve"
+    url: "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "Atom/OData XML, ~15:30 ET each business day. Increment the year parameter annually."
+  - id: fred_st_louis_fed
+    name: "FRED - St. Louis Fed"
+    url: "https://api.stlouisfed.org/fred/"
+    tier: 1
+    access: key_required
+    domain: econ
+    cadence: "continuous"
+    note: "Free key. The best aggregation layer - 800k+ series, normalised, with vintage and revision history."
+
+# --- Economics - central banks ---
+econ_central_banks:
+  - id: federal_reserve_monetary_policy
+    name: "Federal Reserve - Monetary Policy"
+    url: "https://www.federalreserve.gov/feeds/press_monetary.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "scheduled"
+    note: "FOMC statements and minutes. The highest-value single economics feed on this list."
+  - id: federal_reserve_speeches
+    name: "Federal Reserve - Speeches"
+    url: "https://www.federalreserve.gov/feeds/speeches.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "weekly"
+    note: "Where policy shifts are trailed before they are made."
+  - id: federal_reserve_all_press_releases
+    name: "Federal Reserve - All Press Releases"
+    url: "https://www.federalreserve.gov/feeds/press_all.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+  - id: european_central_bank_press
+    name: "European Central Bank Press"
+    url: "https://www.ecb.europa.eu/rss/press.html"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+  - id: bank_of_england_news
+    name: "Bank of England News"
+    url: "https://www.bankofengland.co.uk/rss/news"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "daily"
+  - id: bank_of_canada_press_releases
+    name: "Bank of Canada Press Releases"
+    url: "https://www.bankofcanada.ca/content_type/press-releases/feed/"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "weekly"
+  - id: reserve_bank_of_australia
+    name: "Reserve Bank of Australia"
+    url: "https://www.rba.gov.au/rss/rss-cb-media-releases.xml"
+    tier: 1
+    access: open
+    domain: econ
+    cadence: "weekly"
+
+# --- Reference journalism ---
+journalism:
+  - id: bloomberg_markets
+    name: "Bloomberg Markets"
+    url: "https://feeds.bloomberg.com/markets/news.rss"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "continuous"
+  - id: bloomberg_technology
+    name: "Bloomberg Technology"
+    url: "https://feeds.bloomberg.com/technology/news.rss"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "continuous"
+  - id: wall_street_journal_markets
+    name: "Wall Street Journal - Markets"
+    url: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "continuous"
+  - id: financial_times
+    name: "Financial Times"
+    url: "https://www.ft.com/rss/home"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "continuous"
+  - id: new_york_times_economy
+    name: "New York Times - Economy"
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "daily"
+  - id: new_york_times_technology
+    name: "New York Times - Technology"
+    url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "daily"
+  - id: the_economist_finance_and_economics
+    name: "The Economist - Finance and Economics"
+    url: "https://www.economist.com/finance-and-economics/rss.xml"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "weekly"
+  - id: bbc_business
+    name: "BBC Business"
+    url: "https://feeds.bbci.co.uk/news/business/rss.xml"
+    tier: 2
+    access: open
+    domain: cross
+    cadence: "continuous"
+    note: "The best fully-open general business wire substitute."
+  - id: mit_technology_review
+    name: "MIT Technology Review"
+    url: "https://www.technologyreview.com/feed/"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "daily"
+  - id: ieee_spectrum_ai
+    name: "IEEE Spectrum - AI"
+    url: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
+    tier: 2
+    access: open
+    domain: cross
+    cadence: "daily"
+    note: "The strongest technically-literate AI reporting that is fully open."
+  - id: ars_technica_it
+    name: "Ars Technica - IT"
+    url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
+    tier: 2
+    access: open
+    domain: cross
+    cadence: "daily"
+  - id: the_verge
+    name: "The Verge"
+    url: "https://www.theverge.com/rss/index.xml"
+    tier: 2
+    access: open
+    domain: cross
+    cadence: "continuous"
+    note: "High volume, consumer-tech skew. Filter hard."
+  - id: nature_news
+    name: "Nature - News"
+    url: "https://www.nature.com/nature.rss"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "weekly"
+    note: "Peer-reviewed research news across AI and robotics."
+  - id: science_news
+    name: "Science - News"
+    url: "https://www.science.org/rss/news_current.xml"
+    tier: 2
+    access: paywall_headlines
+    domain: cross
+    cadence: "daily"
+  - id: reuters
+    name: "Reuters"
+    url: "https://www.reuters.com/"
+    tier: 2
+    access: license_required
+    domain: cross
+    cadence: "continuous"
+    note: "RSS returns 401. Requires Reuters Connect licensing or an aggregator holding those rights."
+  - id: associated_press
+    name: "Associated Press"
+    url: "https://apnews.com/"
+    tier: 2
+    access: license_required
+    domain: cross
+    cadence: "continuous"
+    note: "RSS returns 401. AP Newsroom licensing required."
+
+# --- Management consulting research ---
+consulting:
+  - id: mckinsey_insights
+    name: "McKinsey Insights"
+    url: "https://www.mckinsey.com/insights/rss"
+    tier: 3
+    access: open
+    domain: cross
+    cadence: "daily"
+    note: "The only MBB firm with a working open feed - verified 50 items. Carries McKinsey Global Institute output, which is the substantive research arm."
+  - id: bcg_publications
+    name: "BCG Publications"
+    url: "https://www.bcg.com/publications"
+    tier: 3
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "Returns 403 to automated clients across every RSS path tried. Poll the HTML index. BCG Henderson Institute is the research arm."
+  - id: bain_insights
+    name: "Bain Insights"
+    url: "https://www.bain.com/insights/"
+    tier: 3
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "Returns 403. No working feed. The annual Bain Technology Report is the flagship for AI market sizing."
+
+# --- Academic research ---
+academic:
+  - id: stanford_ai_lab_sail_blog
+    name: "Stanford AI Lab (SAIL) Blog"
+    url: "https://ai.stanford.edu/blog/feed.xml"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "several weekly"
+    note: "Researcher-written. The working feed for Stanford AI output."
+  - id: stanford_hai
+    name: "Stanford HAI"
+    url: "https://hai.stanford.edu/news"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No feed on any tested path. Poll the index. Publishes the annual AI Index Report - the single most-cited AI statistics compendium."
+  - id: mit_news_artificial_intelligence
+    name: "MIT News - Artificial Intelligence"
+    url: "https://news.mit.edu/rss/topic/artificial-intelligence2"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "daily"
+    note: "High volume and reliably tagged. The best single academic AI feed."
+  - id: mit_csail
+    name: "MIT CSAIL"
+    url: "https://www.csail.mit.edu/rss.xml"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+    note: "Computer Science and AI Laboratory - core robotics and systems work."
+  - id: mit_initiative_on_the_digital_economy
+    name: "MIT Initiative on the Digital Economy"
+    url: "https://ide.mit.edu/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+    note: "Also listed under automation economics - the labour-displacement research hub."
+  - id: berkeley_news
+    name: "Berkeley News"
+    url: "https://news.berkeley.edu/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "daily"
+  - id: berkeley_engineering
+    name: "Berkeley Engineering"
+    url: "https://engineering.berkeley.edu/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+  - id: berkeley_ai_research_bair_blog
+    name: "Berkeley AI Research (BAIR) Blog"
+    url: "https://bair.berkeley.edu/blog/"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "Feed unreachable from automated clients (connection refused on both http and https). Poll the HTML index. High-value on robot learning."
+  - id: wharton_knowledge_at_wharton
+    name: "Wharton - Knowledge at Wharton"
+    url: "https://knowledge.wharton.upenn.edu/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "daily"
+    note: "UPenn. Strong on the business and labour economics of AI adoption."
+  - id: harvard_berkman_klein_center
+    name: "Harvard Berkman Klein Center"
+    url: "https://cyber.harvard.edu/"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No working feed on any tested path. AI governance and policy research."
+  - id: harvard_business_school_working_knowledge
+    name: "Harvard Business School Working Knowledge"
+    url: "https://hbswk.hbs.edu/"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No working feed. Firm-level AI adoption research."
+  - id: kellogg_insight_northwestern
+    name: "Kellogg Insight - Northwestern"
+    url: "https://insight.kellogg.northwestern.edu/"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No working feed on any tested path. Strong on AI and organisational economics."
+  - id: duke_pratt_school_of_engineering
+    name: "Duke Pratt School of Engineering"
+    url: "https://pratt.duke.edu/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+    note: "The working Duke feed - today.duke.edu returns 404 on every feed path."
+
+# --- Specialist analysis - AI and physical AI ---
+analysis_ai:
+  - id: semianalysis_dylan_patel
+    name: "SemiAnalysis - Dylan Patel"
+    url: "https://www.semianalysis.com/feed"
+    tier: 3
+    access: paywall_headlines
+    domain: ai
+    cadence: "weekly"
+    note: "Best-in-class on compute economics, datacenter buildout and chip supply."
+  - id: stratechery_ben_thompson
+    name: "Stratechery - Ben Thompson"
+    url: "https://stratechery.com/feed/"
+    tier: 3
+    access: paywall_headlines
+    domain: ai
+    cadence: "daily"
+    note: "Strategy and business-model analysis of the AI platform shift."
+  - id: import_ai_jack_clark
+    name: "Import AI - Jack Clark"
+    url: "https://importai.substack.com/feed"
+    tier: 3
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "Author is an Anthropic co-founder - disclose the conflict when citing on Anthropic."
+  - id: interconnects_nathan_lambert
+    name: "Interconnects - Nathan Lambert"
+    url: "https://www.interconnects.ai/feed"
+    tier: 3
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "Deep on open models, RLHF and post-training."
+  - id: don_t_worry_about_the_vase_zvi_mowshowitz
+    name: "Don't Worry About the Vase - Zvi Mowshowitz"
+    url: "https://thezvi.substack.com/feed"
+    tier: 3
+    access: open
+    domain: ai
+    cadence: "weekly"
+    note: "The highest-recall single AI roundup published. Strong AI-risk viewpoint - excellent lead-finder, attribute for opinion."
+  - id: platformer_casey_newton
+    name: "Platformer - Casey Newton"
+    url: "https://www.platformer.news/rss/"
+    tier: 3
+    access: paywall_headlines
+    domain: ai
+    cadence: "several weekly"
+  - id: transformer_shakeel_hashim
+    name: "Transformer - Shakeel Hashim"
+    url: "https://www.transformernews.ai/feed"
+    tier: 3
+    access: open
+    domain: ai
+    cadence: "several weekly"
+    note: "AI policy and safety newsroom."
+  - id: chinatalk_jordan_schneider
+    name: "ChinaTalk - Jordan Schneider"
+    url: "https://www.chinatalk.media/feed"
+    tier: 3
+    access: open
+    domain: ai
+    cadence: "several weekly"
+    note: "Best English-language source on China AI policy and export controls - which is also the best source on robotics supply chains."
+
+# --- Specialist analysis - economics ---
+analysis_econ:
+  - id: calculated_risk_bill_mcbride
+    name: "Calculated Risk - Bill McBride"
+    url: "https://calculatedrisk.substack.com/feed"
+    tier: 3
+    access: open
+    domain: econ
+    cadence: "daily"
+    note: "Housing and employment. Long track record, chart-forward."
+  - id: conversable_economist_timothy_taylor
+    name: "Conversable Economist - Timothy Taylor"
+    url: "https://conversableeconomist.com/feed/"
+    tier: 3
+    access: open
+    domain: econ
+    cadence: "several weekly"
+    note: "Managing editor of the Journal of Economic Perspectives. Notably even-handed."
+  - id: noahpinion_noah_smith
+    name: "Noahpinion - Noah Smith"
+    url: "https://www.noahpinion.blog/feed"
+    tier: 3
+    access: paywall_headlines
+    domain: econ
+    cadence: "several weekly"
+    note: "Opinionated macro commentary. Label clearly as opinion."
+
+# --- Institutional research ---
+institutional:
+  - id: nber_new_working_papers
+    name: "NBER New Working Papers"
+    url: "https://www.nber.org/rss/new.xml"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+    note: "Working papers are not peer reviewed. The primary venue for automation-and-labour research."
+  - id: ny_fed_liberty_street_economics
+    name: "NY Fed - Liberty Street Economics"
+    url: "https://libertystreeteconomics.newyorkfed.org/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "several weekly"
+  - id: atlanta_fed_gdpnow
+    name: "Atlanta Fed GDPNow"
+    url: "https://www.atlantafed.org/rss/gdpnow"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "several weekly"
+    note: "Real-time GDP nowcast, updated after major releases. A model output, not a forecast or an official estimate - always say so."
+  - id: san_francisco_fed_research
+    name: "San Francisco Fed Research"
+    url: "https://www.frbsf.org/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+  - id: oecd_ecoscope
+    name: "OECD Ecoscope"
+    url: "https://oecdecoscope.blog/feed/"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+  - id: our_world_in_data
+    name: "Our World in Data"
+    url: "https://ourworldindata.org/atom.xml"
+    tier: 4
+    access: open
+    domain: cross
+    cadence: "weekly"
+    note: "Long-run series on technology adoption and productivity, with sources shown."
+  - id: brookings_institution
+    name: "Brookings Institution"
+    url: "https://www.brookings.edu/topic/economy/"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "daily"
+    note: "/feed/ returns HTML - bot-blocked."
+  - id: peterson_institute_piie
+    name: "Peterson Institute (PIIE)"
+    url: "https://www.piie.com/research"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No working RSS endpoint found."
+  - id: international_monetary_fund
+    name: "International Monetary Fund"
+    url: "https://www.imf.org/en/News"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "daily"
+    note: "RSS returns 403 to automated clients. Data via the IMF Data API."
+  - id: bank_for_international_settlements
+    name: "Bank for International Settlements"
+    url: "https://www.bis.org/press/index.htm"
+    tier: 4
+    access: scrape
+    domain: cross
+    cadence: "weekly"
+    note: "No current RSS endpoint found."

@@ -2,8 +2,8 @@
 # Nothing else needs to change.
 
 run_mode: daily            # daily | weekly | monthly | earnings-week
-read_budget_words: 1200    # roughly a 10 minute read (1200 words)
-depth_dial: 5              # 1 = headlines only, 5 = analyst memo
+read_budget_words: 1900    # ~15 minute read at 125 wpm for dense analytical prose
+depth_dial: 5              # analysis per Need-to-know item; see section 6. 1 = headlines, 5 = analyst memo
 
 lookback_hours: 24
 monday_lookback_hours: 72
@@ -59,6 +59,10 @@ mute:
   - rehashed op-eds
   - benchmark claims with no independent verification
 
-score_threshold: 14        # out of 20, across materiality + proximity + novelty + source_quality
-min_items_for_full_brief: 3
-max_items: 6
+# Two-tier split, out of 20 (materiality + proximity + novelty + source_quality).
+# Raise need_to_know_threshold if the top section feels padded; lower it if you
+# keep finding real news buried in Other news.
+need_to_know_threshold: 16   # full treatment: what changes a number, a plan, or a decision
+other_news_threshold: 12     # one line and a link: worth having heard of
+min_need_to_know: 3          # fewer than this and the day is called quiet
+max_need_to_know: 6

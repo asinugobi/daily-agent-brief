@@ -1,0 +1,1772 @@
+<title>The Source Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --ground:#F6F8FA;
+  --surface:#FFFFFF;
+  --surface-2:#EEF2F6;
+  --ink:#131A22;
+  --muted:#5B6774;
+  --faint:#8894A2;
+  --rule:#E3E7EC;
+  --accent:#0E7C86;
+  --accent-soft:#DCEFF1;
+
+  --open:#1B7F55;      --open-bg:#E2F2EA;
+  --paywall:#A8701A;   --paywall-bg:#F8EEDC;
+  --license:#B8402A;   --license-bg:#FAE7E2;
+  --key:#3F6699;       --key-bg:#E4ECF6;
+  --scrape:#6E52A0;    --scrape-bg:#EDE7F7;
+
+  --shadow:0 1px 2px rgba(19,26,34,.06), 0 8px 24px -12px rgba(19,26,34,.14);
+
+  --f-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1218;
+    --surface:#161E27;
+    --surface-2:#1D2731;
+    --ink:#E4EAF0;
+    --muted:#8795A4;
+    --faint:#6A7887;
+    --rule:#26313D;
+    --accent:#43C2CC;
+    --accent-soft:#0E2B30;
+
+    --open:#4FBF8B;      --open-bg:#10291F;
+    --paywall:#D7A44A;   --paywall-bg:#2C2312;
+    --license:#E8735A;   --license-bg:#2F1A15;
+    --key:#7DA5DA;       --key-bg:#151F2E;
+    --scrape:#A98FD8;    --scrape-bg:#211A31;
+
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1218;
+  --surface:#161E27;
+  --surface-2:#1D2731;
+  --ink:#E4EAF0;
+  --muted:#8795A4;
+  --faint:#6A7887;
+  --rule:#26313D;
+  --accent:#43C2CC;
+  --accent-soft:#0E2B30;
+
+  --open:#4FBF8B;      --open-bg:#10291F;
+  --paywall:#D7A44A;   --paywall-bg:#2C2312;
+  --license:#E8735A;   --license-bg:#2F1A15;
+  --key:#7DA5DA;       --key-bg:#151F2E;
+  --scrape:#A98FD8;    --scrape-bg:#211A31;
+
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 96px}
+
+/* ---------- masthead ---------- */
+header.mast{
+  padding:56px 0 32px;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:0;
+}
+.kicker{
+  font-family:var(--f-mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 18px;
+  align-items:center;
+  margin-bottom:20px;
+}
+.kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--open);display:inline-block;flex:none}
+h1{
+  font-family:var(--f-display);
+  font-weight:800;
+  font-size:clamp(2.6rem,6.5vw,4.4rem);
+  line-height:.98;
+  letter-spacing:-.025em;
+  margin:0 0 18px;
+  text-wrap:balance;
+}
+.standfirst{
+  font-size:1.14rem;
+  line-height:1.55;
+  color:var(--muted);
+  max-width:60ch;
+  margin:0;
+}
+.standfirst strong{color:var(--ink);font-weight:600}
+
+/* ---------- stat strip ---------- */
+.strip{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  border-bottom:1px solid var(--rule);
+}
+.stat{padding:22px 20px 22px 0}
+.stat .n{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:1.9rem;
+  line-height:1;
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+  display:block;
+}
+.stat .l{
+  font-family:var(--f-mono);
+  font-size:10.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-top:7px;
+  display:block;
+}
+
+/* ---------- sections ---------- */
+section{padding-top:52px}
+h2{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:1.75rem;
+  letter-spacing:-.018em;
+  margin:0 0 10px;
+  text-wrap:balance;
+}
+.sec-intro{color:var(--muted);max-width:66ch;margin:0 0 28px}
+
+/* ---------- tier ladder ---------- */
+.ladder{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.rung{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:24px;
+  padding:22px 0;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.rung .num{
+  font-family:var(--f-mono);
+  font-weight:700;
+  font-size:2rem;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+  padding-top:2px;
+}
+.rung h3{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:1.06rem;
+  margin:0 0 5px;
+  letter-spacing:-.008em;
+}
+.rung p{margin:0;color:var(--muted);font-size:.97rem;max-width:64ch}
+.rung .rule{
+  font-family:var(--f-mono);
+  font-size:11.5px;
+  color:var(--ink);
+  background:var(--surface-2);
+  border-left:2px solid var(--accent);
+  padding:7px 11px;
+  margin-top:11px;
+  display:inline-block;
+  line-height:1.5;
+}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:var(--ground);
+  padding:16px 0 14px;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  align-items:center;
+}
+.search{
+  flex:1 1 210px;
+  min-width:170px;
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  padding:8px 12px;
+  border:1px solid var(--rule);
+  border-radius:3px;
+  background:var(--surface);
+  color:var(--ink);
+}
+.search::placeholder{color:var(--faint)}
+.search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.fbtn{
+  font-family:var(--f-mono);
+  font-size:11px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  padding:6px 11px;
+  border:1px solid var(--rule);
+  background:var(--surface);
+  color:var(--muted);
+  border-radius:3px;
+  cursor:pointer;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.fbtn:hover{border-color:var(--accent);color:var(--ink)}
+.fbtn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.count{
+  font-family:var(--f-mono);
+  font-size:11px;
+  color:var(--faint);
+  letter-spacing:.05em;
+  white-space:nowrap;
+}
+
+/* ---------- source groups ---------- */
+.group{margin-top:34px}
+.group-head{
+  display:flex;
+  align-items:baseline;
+  gap:12px;
+  padding-bottom:9px;
+  border-bottom:1.5px solid var(--ink);
+  margin-bottom:2px;
+}
+.group-head h3{
+  font-family:var(--f-display);
+  font-weight:700;
+  font-size:1.02rem;
+  letter-spacing:.01em;
+  margin:0;
+}
+.group-head .gc{
+  font-family:var(--f-mono);
+  font-size:10.5px;
+  color:var(--faint);
+  letter-spacing:.08em;
+  margin-left:auto;
+  font-variant-numeric:tabular-nums;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px 18px;
+  padding:15px 0;
+  border-bottom:1px solid var(--rule);
+  align-items:start;
+}
+.row .main{min-width:0}
+.row .nm{
+  font-family:var(--f-display);
+  font-weight:600;
+  font-size:1.01rem;
+  letter-spacing:-.005em;
+  margin:0 0 4px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.tier{
+  font-family:var(--f-mono);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.06em;
+  color:var(--accent);
+  background:var(--accent-soft);
+  padding:2px 6px;
+  border-radius:2px;
+  flex:none;
+}
+.url{
+  font-family:var(--f-mono);
+  font-size:11.5px;
+  color:var(--muted);
+  word-break:break-all;
+  line-height:1.5;
+  display:block;
+}
+.url a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+.url a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.url a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.note{
+  font-size:.92rem;
+  color:var(--muted);
+  margin:7px 0 0;
+  max-width:68ch;
+  line-height:1.5;
+}
+.note em{color:var(--ink);font-style:italic}
+.meta{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.chip{
+  font-family:var(--f-mono);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:2px;
+  white-space:nowrap;
+}
+.chip.open{color:var(--open);background:var(--open-bg)}
+.chip.paywall_headlines{color:var(--paywall);background:var(--paywall-bg)}
+.chip.license_required{color:var(--license);background:var(--license-bg)}
+.chip.key_required{color:var(--key);background:var(--key-bg)}
+.chip.scrape{color:var(--scrape);background:var(--scrape-bg)}
+.cad{
+  font-family:var(--f-mono);
+  font-size:10px;
+  color:var(--faint);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.empty{
+  font-family:var(--f-mono);
+  font-size:12.5px;
+  color:var(--faint);
+  padding:36px 0;
+  text-align:center;
+}
+
+/* ---------- caveats ---------- */
+.caveats{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.cav{background:var(--surface);padding:20px}
+.cav h4{
+  font-family:var(--f-mono);
+  font-size:10.5px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  margin:0 0 9px;
+  color:var(--license);
+}
+.cav p{margin:0;font-size:.94rem;color:var(--muted);line-height:1.55}
+.cav p strong{color:var(--ink);font-weight:600}
+
+footer{
+  margin-top:56px;
+  padding-top:22px;
+  border-top:1px solid var(--rule);
+  font-family:var(--f-mono);
+  font-size:11px;
+  color:var(--faint);
+  letter-spacing:.04em;
+  line-height:1.8;
+}
+
+
+/* ---------- domain grid ---------- */
+.domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.dom{background:var(--surface);padding:18px}
+.dom h4{
+  font-family:var(--f-display);font-weight:700;font-size:1rem;margin:0 0 7px;letter-spacing:-.008em;
+  padding-left:10px;border-left:3px solid var(--accent);
+}
+.dom[data-d="physical"] h4{border-left-color:var(--scrape)}
+.dom[data-d="econ"] h4{border-left-color:var(--open)}
+.dom[data-d="cross"] h4{border-left-color:var(--paywall)}
+.dom p{margin:0;font-size:.92rem;color:var(--muted);line-height:1.55}
+.crow{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;width:100%}
+.controls{flex-direction:column;align-items:stretch;gap:10px}
+.group-head h3{display:flex;align-items:center;gap:9px}
+.dchip{
+  width:7px;height:7px;border-radius:50%;flex:none;background:var(--accent);
+}
+.dchip[data-d="physical"]{background:var(--scrape)}
+.dchip[data-d="econ"]{background:var(--open)}
+.dchip[data-d="cross"]{background:var(--paywall)}
+
+@media (max-width:640px){
+  .row{grid-template-columns:1fr}
+  .meta{flex-direction:row;align-items:center;justify-content:flex-start;gap:9px;margin-top:2px}
+  .rung{grid-template-columns:44px 1fr;gap:16px}
+  .rung .num{font-size:1.5rem}
+  header.mast{padding:36px 0 26px}
+  .controls{position:static}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="kicker">
+    <span><span class="dot"></span> 120 sources verified</span>
+    <span>2026 &middot; 09 &middot; 04</span>
+    <span>revalidate every 90 days</span>
+  </div>
+  <h1>The Source Desk</h1>
+  <p class="standfirst">A tiered, endpoint-verified source list for reporting daily developments across <strong>AI, physical AI and the economics of automation</strong> &mdash; down to the filings where capex and R&amp;D become auditable numbers. Every feed below was fetched and confirmed to return live content on the verification date; the dead ones were removed, and the ones that block automated clients are labelled as such rather than quietly left in to fail at 6am.</p>
+</header>
+
+<div class="strip">
+  <div class="stat"><span class="n">120</span><span class="l">Sources</span></div>
+  <div class="stat"><span class="n">79</span><span class="l">Open access</span></div>
+  <div class="stat"><span class="n">22</span><span class="l">No feed &middot; scrape</span></div>
+  <div class="stat"><span class="n">16</span><span class="l">Physical AI</span></div>
+  <div class="stat"><span class="n">61</span><span class="l">Tier 1 primary</span></div>
+</div>
+
+<section>
+  <h2>How the tiers work</h2>
+  <p class="sec-intro">The tier is an evidentiary rank, not a quality score. It answers one question: how much corroboration does a claim from this source need before it goes in the report? A tier&nbsp;3 newsletter can be more insightful than a tier&nbsp;1 press release and still require more sourcing discipline.</p>
+
+  <div class="ladder">
+    <div class="rung">
+      <div class="num">1</div>
+      <div>
+        <h3>Primary record</h3>
+        <p>Statistical agencies, central banks, regulators, company first-party announcements, preprint servers. These sources <em>are</em> the event &mdash; a CPI print is not reported by BLS, it is issued by BLS.</p>
+        <div class="rule">Cite directly. No corroboration required.</div>
+      </div>
+    </div>
+    <div class="rung">
+      <div class="num">2</div>
+      <div>
+        <h3>Reference journalism</h3>
+        <p>Wires and papers of record with published corrections policies and named editors. Reliable on verified fact; the risk is the single-source scoop that gets aggregated onward before anyone confirms it.</p>
+        <div class="rule">Corroborate exclusives before stating as fact.</div>
+      </div>
+    </div>
+    <div class="rung">
+      <div class="num">3</div>
+      <div>
+        <h3>Specialist analysis</h3>
+        <p>Named analysts with real domain depth and an explicit point of view. Highest value per word on this list, and the best early-warning layer &mdash; they routinely surface things the wires reach days later.</p>
+        <div class="rule">Attribute by name. Never launder analysis into fact.</div>
+      </div>
+    </div>
+    <div class="rung">
+      <div class="num">4</div>
+      <div>
+        <h3>Institutional research</h3>
+        <p>Working papers, Fed research, think tanks, multilateral bodies. Slow relative to a daily cycle, so treat as context and background rather than as the day's news.</p>
+        <div class="rule">Flag working papers as not peer reviewed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <h2>Four domains, one desk</h2>
+  <p class="sec-intro">The list spans four domains because the story does. An AI capability release, a humanoid deployment, a robot-installation statistic and a capacity-utilisation print are the same story observed at different depths &mdash; and the economic claim usually only holds if you can see all four.</p>
+  <div class="domains">
+    <div class="dom" data-d="ai"><h4>AI</h4><p>Model releases, research, compute economics, policy. Fastest-moving and the most crowded with noise.</p></div>
+    <div class="dom" data-d="physical"><h4>Physical AI</h4><p>Robotics, embodied models, autonomy, industrial automation. Slower cycles, harder claims to verify &mdash; a demo video is not a deployment.</p></div>
+    <div class="dom" data-d="econ"><h4>Economics</h4><p>Macro prints, central banks, productivity, energy. Scheduled, revisable, and the layer that disciplines the other three.</p></div>
+    <div class="dom" data-d="cross"><h4>Cross-cutting</h4><p>Journalism, consulting, academic and institutional research that spans domains rather than sitting in one.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>The list</h2>
+  <p class="sec-intro">Filter by domain and access model to see what a pipeline can actually ingest without a licensing conversation. Endpoints are the exact URLs verified on 4 September 2026.</p>
+
+  <div class="controls">
+    <div class="crow">
+      <input class="search" id="q" type="search" placeholder="search sources, endpoints, notes&hellip;" aria-label="Search sources">
+      <span class="count" id="count">108 shown</span>
+    </div>
+    <div class="crow">
+      <div class="filters" id="domfilters" role="group" aria-label="Filter by domain">
+        <button class="fbtn" data-d="all" aria-pressed="true">All domains</button>
+        <button class="fbtn" data-d="ai" aria-pressed="false">AI</button>
+        <button class="fbtn" data-d="physical" aria-pressed="false">Physical AI</button>
+        <button class="fbtn" data-d="econ" aria-pressed="false">Economics</button>
+        <button class="fbtn" data-d="cross" aria-pressed="false">Cross-cutting</button>
+      </div>
+      <div class="filters" id="accfilters" role="group" aria-label="Filter by access">
+        <button class="fbtn" data-f="all" aria-pressed="true">Any access</button>
+        <button class="fbtn" data-f="tier1" aria-pressed="false">Tier 1</button>
+        <button class="fbtn" data-f="open" aria-pressed="false">Open</button>
+        <button class="fbtn" data-f="needswork" aria-pressed="false">Needs work</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="out"></div>
+</section>
+
+<section>
+  <h2>Operational caveats</h2>
+  <p class="sec-intro">Four things that will break a naive daily pipeline, found while verifying the endpoints above.</p>
+  <div class="caveats">
+    <div class="cav">
+      <h4>The wires are gone</h4>
+      <p><strong>Reuters and the Associated Press no longer publish open RSS</strong> &mdash; both return 401. Wire-grade corroboration now needs Reuters Connect or AP Newsroom licensing. BBC Business and IEEE Spectrum are the strongest open substitutes.</p>
+    </div>
+    <div class="cav">
+      <h4>Calendar, not polling</h4>
+      <p>US macro releases land at <strong>08:30 ET on dates published months ahead</strong>. Driving a daily report off feed polling means finding out late. Drive it off the BLS, BEA and Census calendars with the template pre-staged.</p>
+    </div>
+    <div class="cav">
+      <h4>Prestige does not imply a feed</h4>
+      <p>The most-cited institutions are the worst-served. <strong>IEA publishes no RSS on any path</strong> tested; Stanford HAI, Berkman Klein, HBS, Kellogg and BAIR have none either. <strong>McKinsey is the only MBB firm with a working open feed</strong> &mdash; BCG and Bain both return 403. Budget for scraping, or lose the highest-authority layer.</p>
+    </div>
+    <div class="cav">
+      <h4>Physical AI needs its own primaries</h4>
+      <p>Humanoid announcements are announcement-driven and easy to over-read. Anchor them to installation data: <strong>IFR World Robotics and A3 order statistics</strong> are the robotics equivalent of a macro print. Neither has a feed, and both matter more than any demo video.</p>
+    </div>
+    <div class="cav">
+      <h4>Some primaries block bots</h4>
+      <p><strong>BLS and the IMF return 403</strong> despite being public. Use the BLS Public Data API instead of its RSS. Treasury moved its yield-curve XML; the old <code>/system/files/126/</code> path silently returns HTML, not a feed.</p>
+    </div>
+    <div class="cav">
+      <h4>EDGAR needs a User-Agent</h4>
+      <p>Every <code>www.sec.gov</code> path returns <strong>403 without a User-Agent declaring a contact email</strong> &mdash; verified: identical requests went 403 to 200 on that header alone. <code>data.sec.gov</code> is laxer, so a pipeline can pass tests and still break on the bulk endpoints. Set it globally and stay under 10 requests/second.</p>
+    </div>
+  <div class="cav">
+      <h4>Deduplicate before you read</h4>
+      <p>One announcement hits a dozen feeds within an hour, with tier 3 commentary arriving a day later on the same underlying event. Cluster by event, not by article, or the brief becomes one story told five ways.</p>
+    </div>
+  </div>
+</section>
+
+\1
+  108 sources &middot; all endpoints fetched and validated 2026-09-04 &middot; HTTP status and feed body confirmed<br>
+  Feed URLs rot: re-run validation quarterly and prune what 404s
+\2
+
+</div>
+
+<script>
+const S = [
+ {
+  "g": "AI &middot; first-party announcements",
+  "d": "ai",
+  "items": [
+   {
+    "n": "OpenAI News",
+    "u": "https://openai.com/news/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "irregular",
+    "d": "ai"
+   },
+   {
+    "n": "Google DeepMind Blog",
+    "u": "https://deepmind.google/blog/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai"
+   },
+   {
+    "n": "Google Research Blog",
+    "u": "https://research.google/blog/rss/",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai"
+   },
+   {
+    "n": "Meta Newsroom",
+    "u": "https://about.fb.com/news/feed/",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "Corporate-wide feed - filter for AI keywords."
+   },
+   {
+    "n": "NVIDIA Blog",
+    "u": "https://blogs.nvidia.com/feed/",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "Marketing-heavy. Useful for hardware and supply signals, not analysis."
+   },
+   {
+    "n": "Hugging Face Blog",
+    "u": "https://huggingface.co/blog/feed.xml",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai"
+   },
+   {
+    "n": "Anthropic News",
+    "u": "https://www.anthropic.com/news",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "ai",
+    "no": "No RSS endpoint exists. Poll the HTML index."
+   },
+   {
+    "n": "Mistral AI News",
+    "u": "https://mistral.ai/news",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "ai",
+    "no": "No RSS endpoint exists."
+   }
+  ]
+ },
+ {
+  "g": "Physical AI &middot; first-party",
+  "d": "physical",
+  "items": [
+   {
+    "n": "NVIDIA Robotics",
+    "u": "https://blogs.nvidia.com/blog/category/robotics/feed/",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "physical",
+    "no": "The Jetson/Isaac/GR00T stack. Best single first-party feed for embodied AI tooling."
+   },
+   {
+    "n": "Waymo Blog",
+    "u": "https://waymo.com/blog/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "several weekly",
+    "d": "physical",
+    "no": "Deepest public operating record of any autonomy company at scale."
+   },
+   {
+    "n": "Boston Dynamics",
+    "u": "https://bostondynamics.com/blog/",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "physical",
+    "no": "Feed endpoint returns zero items - poll the HTML index."
+   },
+   {
+    "n": "Figure AI",
+    "u": "https://www.figure.ai/news",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "physical",
+    "no": "Humanoids. No feed. Announcement-driven, so *verify claims against demo video*."
+   },
+   {
+    "n": "Physical Intelligence",
+    "u": "https://www.physicalintelligence.company/blog",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "physical",
+    "no": "Robot foundation models. No feed."
+   },
+   {
+    "n": "Agility Robotics",
+    "u": "https://agilityrobotics.com/news",
+    "t": 1,
+    "a": "scrape",
+    "c": "irregular",
+    "d": "physical",
+    "no": "Warehouse humanoids. No feed."
+   }
+  ]
+ },
+ {
+  "g": "AI &middot; research preprints",
+  "d": "ai",
+  "items": [
+   {
+    "n": "arXiv cs.AI",
+    "u": "https://export.arxiv.org/rss/cs.AI",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "~270 papers/day and *not peer reviewed*. Signal of research direction, not established finding."
+   },
+   {
+    "n": "arXiv cs.LG - Machine Learning",
+    "u": "https://export.arxiv.org/rss/cs.LG",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai"
+   },
+   {
+    "n": "arXiv cs.CL - Computation and Language",
+    "u": "https://export.arxiv.org/rss/cs.CL",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai"
+   },
+   {
+    "n": "arXiv econ.GN - General Economics",
+    "u": "https://export.arxiv.org/rss/econ.GN",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "Low volume. The best single feed for AI-and-labour-market preprints."
+   }
+  ]
+ },
+ {
+  "g": "Physical AI &middot; research",
+  "d": "physical",
+  "items": [
+   {
+    "n": "arXiv cs.RO - Robotics",
+    "u": "https://export.arxiv.org/rss/cs.RO",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "~75/day. The core physical-AI preprint feed."
+   },
+   {
+    "n": "arXiv eess.SY - Systems and Control",
+    "u": "https://export.arxiv.org/rss/eess.SY",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "Control theory underpinning real-world actuation."
+   },
+   {
+    "n": "arXiv cs.MA - Multiagent Systems",
+    "u": "https://export.arxiv.org/rss/cs.MA",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "Fleet coordination and multi-robot autonomy."
+   },
+   {
+    "n": "Science Robotics",
+    "u": "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=scirobotics",
+    "t": 1,
+    "a": "paywall_headlines",
+    "c": "weekly",
+    "d": "physical",
+    "no": "Peer reviewed - the quality bar arXiv does not clear."
+   },
+   {
+    "n": "Nature Machine Intelligence",
+    "u": "https://www.nature.com/natmachintell.rss",
+    "t": 1,
+    "a": "paywall_headlines",
+    "c": "monthly",
+    "d": "physical",
+    "no": "Peer reviewed. Embodied learning and robot foundation models."
+   }
+  ]
+ },
+ {
+  "g": "Physical AI &middot; industry and installation data",
+  "d": "physical",
+  "items": [
+   {
+    "n": "IEEE Spectrum - Robotics",
+    "u": "https://spectrum.ieee.org/feeds/topic/robotics.rss",
+    "t": 2,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "Technically literate and fully open. The strongest robotics reporting on this list."
+   },
+   {
+    "n": "The Robot Report",
+    "u": "https://www.therobotreport.com/feed/",
+    "t": 2,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "Funding rounds, deployments, order books. The trade press of record."
+   },
+   {
+    "n": "Robohub",
+    "u": "https://robohub.org/feed/",
+    "t": 3,
+    "a": "open",
+    "c": "daily",
+    "d": "physical",
+    "no": "Researcher-written. Bridges the preprint literature and industry."
+   },
+   {
+    "n": "IFR World Robotics",
+    "u": "https://ifr.org/ifr-press-releases",
+    "t": 1,
+    "a": "scrape",
+    "c": "annual",
+    "d": "physical",
+    "no": "*The authoritative robot installation statistics* - functionally the BLS of robotics. No feed; poll the press page. Annual World Robotics report is the anchor dataset for automation economics."
+   },
+   {
+    "n": "A3 - Association for Advancing Automation",
+    "u": "https://www.automate.org/news",
+    "t": 1,
+    "a": "scrape",
+    "c": "quarterly",
+    "d": "physical",
+    "no": "North American robot order and shipment statistics. Returns 403 to bots - poll or license."
+   }
+  ]
+ },
+ {
+  "g": "Automation economics",
+  "d": "econ",
+  "items": [
+   {
+    "n": "Fed G.17 - Industrial Production and Capacity Utilization",
+    "u": "https://www.federalreserve.gov/feeds/g17.xml",
+    "t": 1,
+    "a": "open",
+    "c": "monthly",
+    "d": "econ",
+    "no": "*The core automation-economics primary series.* Capacity utilization is the demand signal that precedes automation capex."
+   },
+   {
+    "n": "MIT Initiative on the Digital Economy",
+    "u": "https://ide.mit.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ",
+    "no": "Where the Acemoglu/Autor-lineage work on automation and labour displacement surfaces first."
+   },
+   {
+    "n": "BLS Productivity and Costs",
+    "u": "https://api.bls.gov/publicAPI/v2/timeseries/data/",
+    "t": 1,
+    "a": "open",
+    "c": "quarterly",
+    "d": "econ",
+    "no": "Via the API - `PRS85006092` is nonfarm business output per hour. The series any automation-productivity claim must be checked against."
+   },
+   {
+    "n": "Census Annual Business Survey",
+    "u": "https://www.census.gov/programs-surveys/abs.html",
+    "t": 1,
+    "a": "scrape",
+    "c": "annual",
+    "d": "econ",
+    "no": "Carries firm-level *robotics and AI adoption* questions. The only large-sample US adoption data. No feed."
+   }
+  ]
+ },
+ {
+  "g": "Company disclosure &middot; SEC EDGAR",
+  "d": "econ",
+  "items": [
+   {
+    "n": "EDGAR XBRL Frames API",
+    "u": "https://data.sec.gov/api/xbrl/frames/us-gaap/PaymentsToAcquirePropertyPlantAndEquipment/USD/CY2025Q1.json",
+    "t": 1,
+    "a": "open",
+    "c": "quarterly",
+    "d": "econ",
+    "no": "*One concept across every filer for one period* - the single most useful endpoint here. Verified: this call returns 2,701 filers' capex for CY2025Q1, ranking Alphabet 17.2B, Microsoft 16.8B, Meta 12.9B. Swap the concept for `ResearchAndDevelopmentExpense` or any us-gaap tag. Caution: filers use different tags for the same economics, so a frame is a starting population, not a complete one."
+   },
+   {
+    "n": "EDGAR Company Facts API",
+    "u": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+    "t": 1,
+    "a": "open",
+    "c": "continuous",
+    "d": "econ",
+    "no": "Every XBRL fact a filer has ever reported, in one document. Zero-pad the CIK to ten digits (this example is NVIDIA)."
+   },
+   {
+    "n": "EDGAR Company Concept API",
+    "u": "https://data.sec.gov/api/xbrl/companyconcept/CIK0001045810/us-gaap/ResearchAndDevelopmentExpense.json",
+    "t": 1,
+    "a": "open",
+    "c": "continuous",
+    "d": "econ",
+    "no": "One concept's full history for one filer, with the accession number behind each figure - so every number you publish is citable to a filing."
+   },
+   {
+    "n": "EDGAR Submissions API",
+    "u": "https://data.sec.gov/submissions/CIK0001045810.json",
+    "t": 1,
+    "a": "open",
+    "c": "continuous",
+    "d": "econ",
+    "no": "Complete filing history and metadata for a filer. The entry point for tracking who filed what, when."
+   },
+   {
+    "n": "EDGAR Full-Text Search",
+    "u": "https://efts.sec.gov/LATEST/search-index?q=%22artificial+intelligence%22&forms=10-K",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "Searches filing *text*, not just metadata. The way to track how language like `physical AI` or `agentic` spreads through 10-K risk factors - a leading indicator disclosure picks up before revenue does."
+   },
+   {
+    "n": "EDGAR Current Filings Stream",
+    "u": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&output=atom",
+    "t": 1,
+    "a": "open",
+    "c": "continuous",
+    "d": "econ",
+    "no": "Real-time Atom feed of filings as they land. Change `type=` for 10-K, 10-Q, S-1. The fastest legitimate route to a material corporate event."
+   },
+   {
+    "n": "EDGAR Insider Transactions - Form 4",
+    "u": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&output=atom",
+    "t": 1,
+    "a": "open",
+    "c": "continuous",
+    "d": "econ",
+    "no": "Officer and director trades, filed within two business days."
+   },
+   {
+    "n": "EDGAR Institutional Holdings - 13F",
+    "u": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=13F-HR&output=atom",
+    "t": 1,
+    "a": "open",
+    "c": "quarterly",
+    "d": "econ",
+    "no": "Institutional positions. *Filed 45 days after quarter-end* - stale by construction, so never report it as a current holding."
+   },
+   {
+    "n": "SEC Company Tickers Map",
+    "u": "https://www.sec.gov/files/company_tickers.json",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ",
+    "no": "Ticker-to-CIK lookup. You need this before any other EDGAR call - fetch once and cache."
+   },
+   {
+    "n": "EDGAR Financial Statement Data Sets",
+    "u": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2025q1.zip",
+    "t": 1,
+    "a": "open",
+    "c": "quarterly",
+    "d": "econ",
+    "no": "Bulk quarterly ZIP of every filer's numeric XBRL data. Use this instead of thousands of API calls when doing cross-sectional work."
+   },
+   {
+    "n": "EDGAR Daily Index",
+    "u": "https://www.sec.gov/Archives/edgar/daily-index/2026/QTR3/",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "Every filing accepted each day. The completeness backstop if a feed drops something."
+   },
+   {
+    "n": "SEC Press Releases",
+    "u": "https://www.sec.gov/news/pressreleases.rss",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "Enforcement actions and rulemaking. Pair with `https://www.sec.gov/news/speeches-statements.rss` for policy signals."
+   }
+  ]
+ },
+ {
+  "g": "Energy and AI infrastructure",
+  "d": "econ",
+  "items": [
+   {
+    "n": "IEA - International Energy Agency",
+    "u": "https://www.iea.org/analysis",
+    "t": 1,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "econ",
+    "no": "*No RSS exists anywhere on iea.org* - verified across eight candidate paths. Poll the analysis index. The authoritative source on datacenter electricity demand, now a first-order AI economics story."
+   },
+   {
+    "n": "EIA Today in Energy",
+    "u": "https://www.eia.gov/rss/todayinenergy.xml",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "US Energy Information Administration. Daily, chart-led, and open - the practical substitute for IEA's missing feed."
+   },
+   {
+    "n": "EIA Press Releases",
+    "u": "https://www.eia.gov/rss/press_rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ",
+    "no": "Short-Term Energy Outlook and electricity demand projections."
+   }
+  ]
+ },
+ {
+  "g": "AI &middot; policy and regulation",
+  "d": "ai",
+  "items": [
+   {
+    "n": "Federal Register - artificial intelligence",
+    "u": "https://www.federalregister.gov/api/v1/documents.json?conditions[term]=artificial+intelligence&order=newest",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "JSON API, no key. The authoritative record of US rulemaking. Add `conditions[type]=RULE` to cut notice noise."
+   },
+   {
+    "n": "NIST News",
+    "u": "https://www.nist.gov/news-events/news/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "Source for AI Risk Management Framework updates."
+   },
+   {
+    "n": "European Commission - Digital Strategy",
+    "u": "https://digital-strategy.ec.europa.eu/en/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai",
+    "no": "Primary feed for EU AI Act implementation and guidance."
+   },
+   {
+    "n": "European Commission Press Corner",
+    "u": "https://ec.europa.eu/commission/presscorner/api/rss?language=en",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "ai"
+   },
+   {
+    "n": "UK AI Security Institute",
+    "u": "https://www.gov.uk/search/news-and-communications.atom?organisations%5B%5D=ai-safety-institute",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "Atom. The gov.uk org slug is still `ai-safety-institute` after the rename."
+   },
+   {
+    "n": "CSET - Georgetown",
+    "u": "https://cset.georgetown.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "Center for Security and Emerging Technology. Rigorous on compute, chips and China policy."
+   },
+   {
+    "n": "RAND",
+    "u": "https://www.rand.org/news/press.xml",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "The AI-topic feed returns zero items; the press feed carries the same research."
+   }
+  ]
+ },
+ {
+  "g": "Economics &middot; US agencies and Treasury",
+  "d": "econ",
+  "items": [
+   {
+    "n": "BLS Public Data API v2",
+    "u": "https://api.bls.gov/publicAPI/v2/timeseries/data/",
+    "t": 1,
+    "a": "open",
+    "c": "scheduled",
+    "d": "econ",
+    "no": "POST. CPI, jobs, PPI, ECI. Works unregistered at low volume. Key series: `CUUR0000SA0` CPI-U, `LNS14000000` unemployment, `CES0000000001` payrolls. Its RSS returns 403 - use this."
+   },
+   {
+    "n": "BLS Release Calendar",
+    "u": "https://www.bls.gov/schedule/news_release/",
+    "t": 1,
+    "a": "scrape",
+    "c": "scheduled",
+    "d": "econ",
+    "no": "*Critical for a daily report.* Major prints drop 08:30 ET on dates known months ahead."
+   },
+   {
+    "n": "Bureau of Economic Analysis",
+    "u": "https://apps.bea.gov/rss/rss.xml",
+    "t": 1,
+    "a": "open",
+    "c": "scheduled",
+    "d": "econ",
+    "no": "GDP, PCE price index (the Fed's preferred inflation gauge), trade balance."
+   },
+   {
+    "n": "Census Economic Indicators",
+    "u": "https://www.census.gov/economic-indicators/indicator.xml",
+    "t": 1,
+    "a": "open",
+    "c": "scheduled",
+    "d": "econ",
+    "no": "Retail sales, housing starts, durable goods, business inventories."
+   },
+   {
+    "n": "Treasury Daily Yield Curve",
+    "u": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "Atom/OData XML, ~15:30 ET each business day. Increment the year parameter annually."
+   },
+   {
+    "n": "FRED - St. Louis Fed",
+    "u": "https://api.stlouisfed.org/fred/",
+    "t": 1,
+    "a": "key_required",
+    "c": "continuous",
+    "d": "econ",
+    "no": "Free key. The best aggregation layer - 800k+ series, normalised, with vintage and revision history."
+   }
+  ]
+ },
+ {
+  "g": "Economics &middot; central banks",
+  "d": "econ",
+  "items": [
+   {
+    "n": "Federal Reserve - Monetary Policy",
+    "u": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+    "t": 1,
+    "a": "open",
+    "c": "scheduled",
+    "d": "econ",
+    "no": "FOMC statements and minutes. The highest-value single economics feed on this list."
+   },
+   {
+    "n": "Federal Reserve - Speeches",
+    "u": "https://www.federalreserve.gov/feeds/speeches.xml",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ",
+    "no": "Where policy shifts are trailed before they are made."
+   },
+   {
+    "n": "Federal Reserve - All Press Releases",
+    "u": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ"
+   },
+   {
+    "n": "European Central Bank Press",
+    "u": "https://www.ecb.europa.eu/rss/press.html",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ"
+   },
+   {
+    "n": "Bank of England News",
+    "u": "https://www.bankofengland.co.uk/rss/news",
+    "t": 1,
+    "a": "open",
+    "c": "daily",
+    "d": "econ"
+   },
+   {
+    "n": "Bank of Canada Press Releases",
+    "u": "https://www.bankofcanada.ca/content_type/press-releases/feed/",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ"
+   },
+   {
+    "n": "Reserve Bank of Australia",
+    "u": "https://www.rba.gov.au/rss/rss-cb-media-releases.xml",
+    "t": 1,
+    "a": "open",
+    "c": "weekly",
+    "d": "econ"
+   }
+  ]
+ },
+ {
+  "g": "Reference journalism",
+  "d": "cross",
+  "items": [
+   {
+    "n": "Bloomberg Markets",
+    "u": "https://feeds.bloomberg.com/markets/news.rss",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "continuous",
+    "d": "cross"
+   },
+   {
+    "n": "Bloomberg Technology",
+    "u": "https://feeds.bloomberg.com/technology/news.rss",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "continuous",
+    "d": "cross"
+   },
+   {
+    "n": "Wall Street Journal - Markets",
+    "u": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "continuous",
+    "d": "cross"
+   },
+   {
+    "n": "Financial Times",
+    "u": "https://www.ft.com/rss/home",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "continuous",
+    "d": "cross"
+   },
+   {
+    "n": "New York Times - Economy",
+    "u": "https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "New York Times - Technology",
+    "u": "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "The Economist - Finance and Economics",
+    "u": "https://www.economist.com/finance-and-economics/rss.xml",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "weekly",
+    "d": "cross"
+   },
+   {
+    "n": "BBC Business",
+    "u": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    "t": 2,
+    "a": "open",
+    "c": "continuous",
+    "d": "cross",
+    "no": "The best fully-open general business wire substitute."
+   },
+   {
+    "n": "MIT Technology Review",
+    "u": "https://www.technologyreview.com/feed/",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "IEEE Spectrum - AI",
+    "u": "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss",
+    "t": 2,
+    "a": "open",
+    "c": "daily",
+    "d": "cross",
+    "no": "The strongest technically-literate AI reporting that is fully open."
+   },
+   {
+    "n": "Ars Technica - IT",
+    "u": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+    "t": 2,
+    "a": "open",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "The Verge",
+    "u": "https://www.theverge.com/rss/index.xml",
+    "t": 2,
+    "a": "open",
+    "c": "continuous",
+    "d": "cross",
+    "no": "High volume, consumer-tech skew. Filter hard."
+   },
+   {
+    "n": "Nature - News",
+    "u": "https://www.nature.com/nature.rss",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Peer-reviewed research news across AI and robotics."
+   },
+   {
+    "n": "Science - News",
+    "u": "https://www.science.org/rss/news_current.xml",
+    "t": 2,
+    "a": "paywall_headlines",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "Reuters",
+    "u": "https://www.reuters.com/",
+    "t": 2,
+    "a": "license_required",
+    "c": "continuous",
+    "d": "cross",
+    "no": "RSS returns 401. Requires Reuters Connect licensing or an aggregator holding those rights."
+   },
+   {
+    "n": "Associated Press",
+    "u": "https://apnews.com/",
+    "t": 2,
+    "a": "license_required",
+    "c": "continuous",
+    "d": "cross",
+    "no": "RSS returns 401. AP Newsroom licensing required."
+   }
+  ]
+ },
+ {
+  "g": "Management consulting research",
+  "d": "cross",
+  "items": [
+   {
+    "n": "McKinsey Insights",
+    "u": "https://www.mckinsey.com/insights/rss",
+    "t": 3,
+    "a": "open",
+    "c": "daily",
+    "d": "cross",
+    "no": "*The only MBB firm with a working open feed* - verified 50 items. Carries McKinsey Global Institute output, which is the substantive research arm."
+   },
+   {
+    "n": "BCG Publications",
+    "u": "https://www.bcg.com/publications",
+    "t": 3,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Returns 403 to automated clients across every RSS path tried. Poll the HTML index. BCG Henderson Institute is the research arm."
+   },
+   {
+    "n": "Bain Insights",
+    "u": "https://www.bain.com/insights/",
+    "t": 3,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Returns 403. No working feed. The annual Bain Technology Report is the flagship for AI market sizing."
+   }
+  ]
+ },
+ {
+  "g": "Academic research",
+  "d": "cross",
+  "items": [
+   {
+    "n": "Stanford AI Lab (SAIL) Blog",
+    "u": "https://ai.stanford.edu/blog/feed.xml",
+    "t": 4,
+    "a": "open",
+    "c": "several weekly",
+    "d": "cross",
+    "no": "Researcher-written. The working feed for Stanford AI output."
+   },
+   {
+    "n": "Stanford HAI",
+    "u": "https://hai.stanford.edu/news",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "*No feed on any tested path.* Poll the index. Publishes the annual AI Index Report - the single most-cited AI statistics compendium."
+   },
+   {
+    "n": "MIT News - Artificial Intelligence",
+    "u": "https://news.mit.edu/rss/topic/artificial-intelligence2",
+    "t": 4,
+    "a": "open",
+    "c": "daily",
+    "d": "cross",
+    "no": "High volume and reliably tagged. The best single academic AI feed."
+   },
+   {
+    "n": "MIT CSAIL",
+    "u": "https://www.csail.mit.edu/rss.xml",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Computer Science and AI Laboratory - core robotics and systems work."
+   },
+   {
+    "n": "MIT Initiative on the Digital Economy",
+    "u": "https://ide.mit.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Also listed under automation economics - the labour-displacement research hub."
+   },
+   {
+    "n": "Berkeley News",
+    "u": "https://news.berkeley.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "daily",
+    "d": "cross"
+   },
+   {
+    "n": "Berkeley Engineering",
+    "u": "https://engineering.berkeley.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross"
+   },
+   {
+    "n": "Berkeley AI Research (BAIR) Blog",
+    "u": "https://bair.berkeley.edu/blog/",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "*Feed unreachable from automated clients* (connection refused on both http and https). Poll the HTML index. High-value on robot learning."
+   },
+   {
+    "n": "Wharton - Knowledge at Wharton",
+    "u": "https://knowledge.wharton.upenn.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "daily",
+    "d": "cross",
+    "no": "UPenn. Strong on the business and labour economics of AI adoption."
+   },
+   {
+    "n": "Harvard Berkman Klein Center",
+    "u": "https://cyber.harvard.edu/",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "No working feed on any tested path. AI governance and policy research."
+   },
+   {
+    "n": "Harvard Business School Working Knowledge",
+    "u": "https://hbswk.hbs.edu/",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "No working feed. Firm-level AI adoption research."
+   },
+   {
+    "n": "Kellogg Insight - Northwestern",
+    "u": "https://insight.kellogg.northwestern.edu/",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "No working feed on any tested path. Strong on AI and organisational economics."
+   },
+   {
+    "n": "Duke Pratt School of Engineering",
+    "u": "https://pratt.duke.edu/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross",
+    "no": "The working Duke feed - today.duke.edu returns 404 on every feed path."
+   }
+  ]
+ },
+ {
+  "g": "Specialist analysis &middot; AI and physical AI",
+  "d": "ai",
+  "items": [
+   {
+    "n": "SemiAnalysis - Dylan Patel",
+    "u": "https://www.semianalysis.com/feed",
+    "t": 3,
+    "a": "paywall_headlines",
+    "c": "weekly",
+    "d": "ai",
+    "no": "Best-in-class on compute economics, datacenter buildout and chip supply."
+   },
+   {
+    "n": "Stratechery - Ben Thompson",
+    "u": "https://stratechery.com/feed/",
+    "t": 3,
+    "a": "paywall_headlines",
+    "c": "daily",
+    "d": "ai",
+    "no": "Strategy and business-model analysis of the AI platform shift."
+   },
+   {
+    "n": "Import AI - Jack Clark",
+    "u": "https://importai.substack.com/feed",
+    "t": 3,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "Author is an Anthropic co-founder - *disclose the conflict* when citing on Anthropic."
+   },
+   {
+    "n": "Interconnects - Nathan Lambert",
+    "u": "https://www.interconnects.ai/feed",
+    "t": 3,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "Deep on open models, RLHF and post-training."
+   },
+   {
+    "n": "Don't Worry About the Vase - Zvi Mowshowitz",
+    "u": "https://thezvi.substack.com/feed",
+    "t": 3,
+    "a": "open",
+    "c": "weekly",
+    "d": "ai",
+    "no": "The highest-recall single AI roundup published. Strong AI-risk viewpoint - excellent lead-finder, attribute for opinion."
+   },
+   {
+    "n": "Platformer - Casey Newton",
+    "u": "https://www.platformer.news/rss/",
+    "t": 3,
+    "a": "paywall_headlines",
+    "c": "several weekly",
+    "d": "ai"
+   },
+   {
+    "n": "Transformer - Shakeel Hashim",
+    "u": "https://www.transformernews.ai/feed",
+    "t": 3,
+    "a": "open",
+    "c": "several weekly",
+    "d": "ai",
+    "no": "AI policy and safety newsroom."
+   },
+   {
+    "n": "ChinaTalk - Jordan Schneider",
+    "u": "https://www.chinatalk.media/feed",
+    "t": 3,
+    "a": "open",
+    "c": "several weekly",
+    "d": "ai",
+    "no": "Best English-language source on China AI policy and export controls - which is *also* the best source on robotics supply chains."
+   }
+  ]
+ },
+ {
+  "g": "Specialist analysis &middot; economics",
+  "d": "econ",
+  "items": [
+   {
+    "n": "Calculated Risk - Bill McBride",
+    "u": "https://calculatedrisk.substack.com/feed",
+    "t": 3,
+    "a": "open",
+    "c": "daily",
+    "d": "econ",
+    "no": "Housing and employment. Long track record, chart-forward."
+   },
+   {
+    "n": "Conversable Economist - Timothy Taylor",
+    "u": "https://conversableeconomist.com/feed/",
+    "t": 3,
+    "a": "open",
+    "c": "several weekly",
+    "d": "econ",
+    "no": "Managing editor of the Journal of Economic Perspectives. Notably even-handed."
+   },
+   {
+    "n": "Noahpinion - Noah Smith",
+    "u": "https://www.noahpinion.blog/feed",
+    "t": 3,
+    "a": "paywall_headlines",
+    "c": "several weekly",
+    "d": "econ",
+    "no": "Opinionated macro commentary. Label clearly as opinion."
+   }
+  ]
+ },
+ {
+  "g": "Institutional research",
+  "d": "cross",
+  "items": [
+   {
+    "n": "NBER New Working Papers",
+    "u": "https://www.nber.org/rss/new.xml",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross",
+    "no": "*Working papers are not peer reviewed.* The primary venue for automation-and-labour research."
+   },
+   {
+    "n": "NY Fed - Liberty Street Economics",
+    "u": "https://libertystreeteconomics.newyorkfed.org/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "several weekly",
+    "d": "cross"
+   },
+   {
+    "n": "Atlanta Fed GDPNow",
+    "u": "https://www.atlantafed.org/rss/gdpnow",
+    "t": 4,
+    "a": "open",
+    "c": "several weekly",
+    "d": "cross",
+    "no": "Real-time GDP nowcast, updated after major releases. A *model output*, not a forecast or an official estimate - always say so."
+   },
+   {
+    "n": "San Francisco Fed Research",
+    "u": "https://www.frbsf.org/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross"
+   },
+   {
+    "n": "OECD Ecoscope",
+    "u": "https://oecdecoscope.blog/feed/",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross"
+   },
+   {
+    "n": "Our World in Data",
+    "u": "https://ourworldindata.org/atom.xml",
+    "t": 4,
+    "a": "open",
+    "c": "weekly",
+    "d": "cross",
+    "no": "Long-run series on technology adoption and productivity, with sources shown."
+   },
+   {
+    "n": "Brookings Institution",
+    "u": "https://www.brookings.edu/topic/economy/",
+    "t": 4,
+    "a": "scrape",
+    "c": "daily",
+    "d": "cross",
+    "no": "`/feed/` returns HTML - bot-blocked."
+   },
+   {
+    "n": "Peterson Institute (PIIE)",
+    "u": "https://www.piie.com/research",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "No working RSS endpoint found."
+   },
+   {
+    "n": "International Monetary Fund",
+    "u": "https://www.imf.org/en/News",
+    "t": 4,
+    "a": "scrape",
+    "c": "daily",
+    "d": "cross",
+    "no": "RSS returns 403 to automated clients. Data via the IMF Data API."
+   },
+   {
+    "n": "Bank for International Settlements",
+    "u": "https://www.bis.org/press/index.htm",
+    "t": 4,
+    "a": "scrape",
+    "c": "weekly",
+    "d": "cross",
+    "no": "No current RSS endpoint found."
+   }
+  ]
+ }
+];
+
+const LBL={open:"Open",paywall_headlines:"Paywall",license_required:"License",key_required:"API key",scrape:"Scrape"};
+const TOTAL=S.reduce((a,g)=>a+g.items.length,0);
+const out=document.getElementById('out');
+const countEl=document.getElementById('count');
+const q=document.getElementById('q');
+let acc='all', dom='all';
+
+function md(s){
+  return s.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*([^*]+)\*/g,'<em>$1</em>');
+}
+function match(it){
+  const term=q.value.trim().toLowerCase();
+  if(term){
+    const hay=(it.n+' '+it.u+' '+(it.no||'')).toLowerCase();
+    if(!hay.includes(term)) return false;
+  }
+  if(dom!=='all' && it.d!==dom) return false;
+  if(acc==='all') return true;
+  if(acc==='tier1') return it.t===1;
+  if(acc==='needswork') return it.a==='scrape'||it.a==='license_required'||it.a==='key_required';
+  return it.a===acc;
+}
+function render(){
+  let html='',shown=0;
+  for(const grp of S){
+    const items=grp.items.filter(match);
+    if(!items.length) continue;
+    shown+=items.length;
+    html+=`<div class="group"><div class="group-head"><h3><span class="dchip" data-d="${grp.d}"></span>${grp.g}</h3><span class="gc">${items.length}</span></div>`;
+    for(const it of items){
+      html+=`<div class="row"><div class="main">`
+        +`<p class="nm"><span class="tier">T${it.t}</span>${it.n}</p>`
+        +`<span class="url"><a href="${it.u}" target="_blank" rel="noopener noreferrer">${it.u}</a></span>`
+        +(it.no?`<p class="note">${md(it.no)}</p>`:'')
+        +`</div><div class="meta"><span class="chip ${it.a}">${LBL[it.a]}</span><span class="cad">${it.c}</span></div></div>`;
+    }
+    html+='</div>';
+  }
+  out.innerHTML = html || '<p class="empty">No sources match that filter.</p>';
+  countEl.textContent = shown===TOTAL ? `${TOTAL} shown` : `${shown} of ${TOTAL} shown`;
+}
+document.getElementById('accfilters').addEventListener('click',e=>{
+  const b=e.target.closest('.fbtn'); if(!b) return;
+  acc=b.dataset.f;
+  document.querySelectorAll('#accfilters .fbtn').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  render();
+});
+document.getElementById('domfilters').addEventListener('click',e=>{
+  const b=e.target.closest('.fbtn'); if(!b) return;
+  dom=b.dataset.d;
+  document.querySelectorAll('#domfilters .fbtn').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  render();
+});
+q.addEventListener('input',render);
+render();
+</script>

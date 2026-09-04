@@ -1,0 +1,9 @@
+# Sourcedesk runtime artifacts. The source list itself (sourcedesk/sources.json,
+# sources.yaml) is checked in; what the pipeline fetches is not.
+state/sourcedesk.db
+state/sourcedesk.db-wal
+state/sourcedesk.db-shm
+state/sourcedesk/
+sourcedesk/sources_js.txt
+__pycache__/
+*.pyc

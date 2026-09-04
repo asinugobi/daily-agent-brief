@@ -1,0 +1,52 @@
+Daily brief agent  ·  opus-5 synthesizer, sonnet researchers
+Auth: Claude Code login (claude.ai)
+Project: /Users/asinugobi/daily-brief-agent
+
+      4s  bash      date "+%Y-%m-%d %A %H:%M %Z"
+      5s  bash      ls -la ./ && echo "--- INBOX ---" && ls -la ./inbox/ 2>&
+      9s  read      /Users/asinugobi/dev/daily-brief/config.yaml
+     11s  bash      ls -la ./state/ && echo "=== OPEN LOOPS ===" && cat ./st
+     11s  bash      cat ./inbox/README.md && echo "=== STYLE README ===" && 
+     16s  bash      pwd && echo "---" && ls -la ./state/archive/ && echo "==
+     24s  read      /Users/asinugobi/daily-brief-agent/config.yaml
+     24s  bash      cat ./state/archive/covered.run1.jsonl
+     57s  dispatch  Beat: compute chips cloud energy
+   1m10s  dispatch  Beat: foundation model labs
+   1m24s  dispatch  Beat: investing and markets
+   1m38s  dispatch  Beat: geopolitics geoeconomics
+   1m38s  returned  beat 1/9
+   1m51s  dispatch  Beat: enterprise AI applications
+   1m51s  returned  beat 2/9
+   2m04s  dispatch  Beat: robotics physical AI
+   2m04s  returned  beat 3/9
+   2m18s  dispatch  Beat: mobility and AVs
+   2m18s  returned  beat 4/9
+   2m32s  dispatch  Beat: policy safety regulation
+   2m32s  returned  beat 5/9
+   2m47s  dispatch  Beat: research and capability evidence
+   2m47s  returned  beat 6/9
+   2m54s  returned  beat 7/9
+   3m56s  returned  beat 8/9
+   5m17s  returned  beat 9/9
+   5m38s  dispatch  Beat: geopolitics
+   5m47s  dispatch  Beat: robotics physical AI
+   5m54s  dispatch  Beat: enterprise AI
+   6m25s  returned  beat 10/12
+   6m44s  returned  beat 11/12
+   7m16s  returned  beat 12/12
+   7m31s  dispatch  Beat: mobility AVs
+   7m37s  dispatch  Beat: policy safety regulation
+   7m43s  dispatch  Beat: research capability evidence
+   7m57s  returned  beat 13/15
+   8m01s  returned  beat 14/15
+   8m33s  returned  beat 15/15
+  10m58s  write     /Users/asinugobi/daily-brief-agent/briefs/2026-09-02.md
+  11m17s  bash      cat >> state/covered.jsonl <<'EOF'
+{"date":"2026-09-02",
+
+--- error_max_budget_usd in 11m17s · $5.01
+
+    Budget cap hit. Raise it with --budget, or trim the coverage map.
+
+I'll start with the date check and orientation sequence.Config loaded. Today is Wednesday, so lookback is 24 hours. Note: `covered.jsonl` was reset, but run 1 from earlier today is archived — I'll use its ledger as the skip list so I don't republish. Dispatching all nine beats now.Concurrency caps at 3, so six beats never launched. I'll run them in two tighter batches — I must not rank on partial coverage.$1.07 of budget left, so the last three beats run on tight caps to leave room for writing.All nine beats are in. Ranking, then writing.
+HTML: /Users/asinugobi/daily-brief-agent/briefs/2026-09-02.html
